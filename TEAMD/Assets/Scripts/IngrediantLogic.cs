@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Controls : MonoBehaviour
+public class IngrediantLogic : MonoBehaviour
 {
     private Rigidbody2D rb;
     private Vector2 startTouchPosition;
@@ -11,6 +11,9 @@ public class Controls : MonoBehaviour
     [SerializeField] private float flickForceMultiplier;
     [SerializeField] private float dragSpeed;
     [SerializeField] private float maxDragDistance;
+
+    private bool AddedtoPlate;  
+    [SerializeField] private float minVelocity;
     // Start is called before the first frame update
     void Start()
     {
@@ -53,5 +56,36 @@ public class Controls : MonoBehaviour
             // Move the object smoothly toward the clamped position
             rb.MovePosition(Vector2.Lerp(rb.position, clampedPosition, Time.deltaTime * dragSpeed));
         }
+    }
+
+    //Adding Ingrediant onto plate
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        // Check if the collided object is the plate
+        if (collision.gameObject.CompareTag("Plate"))
+        {
+            Debug.Log(rb.velocity);
+
+            // Check if the velocity is higher than the minimum
+            if (rb.velocity.magnitude > minVelocity)
+            {
+                AddToPlate(collision.gameObject);
+            }
+
+            else
+            {
+                Debug.Log("Velocity too low to add to plate.");
+            }
+        }
+    }
+
+    private void AddToPlate(GameObject plate)
+    {
+        transform.SetParent(plate.transform);  //Ingredient become parent of the plate
+        rb.velocity = Vector2.zero;
+        AddedtoPlate = true;
+        rb.isKinematic = true; // Prevent further physics interactions
+        transform.localPosition = new Vector3(0f, 0f, 0f);  // You can adjust the x and y values for offset
+        Debug.Log("Ingredient added to the plate!");
     }
 }

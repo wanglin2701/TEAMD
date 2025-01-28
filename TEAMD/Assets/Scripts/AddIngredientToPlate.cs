@@ -19,11 +19,11 @@ public class IngredientPlateCollision : MonoBehaviour
 
     private void FixedUpdate()
     {
-        if (AddedtoPlate == false)
-        {
-            rb.velocity = direction * speed;
+        // if (AddedtoPlate == false)
+        // {
+        //     rb.velocity = direction * speed;
 
-        }
+        // }
         //Debug.Log(rb.velocity);
 
 
