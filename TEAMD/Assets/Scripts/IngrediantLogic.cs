@@ -78,11 +78,11 @@ public class IngrediantLogic : MonoBehaviour
         
     
         // Force
-        if (Input.GetMouseButtonDown(0))
-        {
-            Debug.Log("Mouse Click Detected - Applying Force!");
-            AddForceUp();
-        }
+        // if (Input.GetMouseButtonDown(0))
+        // {
+        //     Debug.Log("Mouse Click Detected - Applying Force!");
+        //     AddForceUp();
+        // }
     }
     private void OnMouseDown(){
         startTouchPosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
@@ -118,7 +118,7 @@ public class IngrediantLogic : MonoBehaviour
     }
 
     //Adding Ingrediant onto plate
-    private void OnTriggerEnter2D(Collider2D collision)
+    private void OnCollisionEnter2D(Collision2D collision)
     {
         // Check if the collided object is the plate
         if (collision.gameObject.CompareTag("Plate"))

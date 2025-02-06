@@ -130,6 +130,12 @@ MonoBehaviour:
   dragSpeed: 2
   maxDragDistance: 2
   minVelocity: 10
+  floatStrength: 0.5
+  floatSpeed: 1
+  floatDistance: 0.5
+  moveSpeed: 2
+  isMovingLeft: 0
+  isMovingRight: 1
 --- !u!61 &-8940464286372050251
 BoxCollider2D:
   m_ObjectHideFlags: 0
