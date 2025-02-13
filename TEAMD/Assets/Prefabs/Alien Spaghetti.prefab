@@ -95,7 +95,7 @@ Rigidbody2D:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5275746774799953152}
-  m_BodyType: 0
+  m_BodyType: 1
   m_Simulated: 1
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0
@@ -130,6 +130,12 @@ MonoBehaviour:
   dragSpeed: 2
   maxDragDistance: 2
   minVelocity: 10
+  floatStrength: 0.5
+  floatSpeed: 1
+  floatDistance: 0.5
+  moveSpeed: 2
+  isMovingLeft: 0
+  isMovingRight: 1
 --- !u!61 &-8940464286372050251
 BoxCollider2D:
   m_ObjectHideFlags: 0
