@@ -23,6 +23,10 @@ public class IngrediantLogic : MonoBehaviour
     
     private Vector3 startPosition;
     private bool movingUp = true;     // Toggle for floating motion
+    public GameObject targetPlate;
+    public float offsetRange = 2f;
+    public float directionVariation = 10f;
+    private Vector2 targetOffset;
     
     
     [Header("Movement & Physics")]
@@ -33,43 +37,65 @@ public class IngrediantLogic : MonoBehaviour
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
+        targetPlate = GameObject.Find("Plate");
 
-        // Floating Effect - Adjust Rigidbody2D velocity up and down
-        if (movingUp)
+        if (targetPlate != null)
         {
-            rb.velocity = new Vector2(rb.velocity.x, floatStrength);
-        }
-        else
-        {
-            rb.velocity = new Vector2(rb.velocity.x, -floatStrength / 2); // Make downward motion slower
+            Vector2 targetPos = targetPlate.transform.position;
+
+            // Pick a random offset near the target
+            targetOffset = new Vector2(
+                targetPos.x + Random.Range(-offsetRange, offsetRange),
+                targetPos.y + Random.Range(-offsetRange, offsetRange)
+            );
+
+            // Compute initial direction
+            Vector2 direction = (targetOffset - (Vector2)transform.position).normalized;
+
+            // Add a small random angle variation
+            float randomAngle = Random.Range(-directionVariation, directionVariation);
+            direction = Quaternion.Euler(0, 0, randomAngle) * direction;
+
+            // Apply movement
+            rb.velocity = direction * moveSpeed;
         }
 
-        // Toggle direction based on floating range
-        if (transform.position.y > startPosition.y + floatDistance)
-        {
-            movingUp = false;
-        }
-        else if (transform.position.y < startPosition.y - floatDistance)
-        {
-            movingUp = true;
-        }
+        // // Floating Effect - Adjust Rigidbody2D velocity up and down
+        // if (movingUp)
+        // {
+        //     rb.velocity = new Vector2(rb.velocity.x, floatStrength);
+        // }
+        // else
+        // {
+        //     rb.velocity = new Vector2(rb.velocity.x, -floatStrength / 2); // Make downward motion slower
+        // }
+
+        // // Toggle direction based on floating range
+        // if (transform.position.y > startPosition.y + floatDistance)
+        // {
+        //     movingUp = false;
+        // }
+        // else if (transform.position.y < startPosition.y - floatDistance)
+        // {
+        //     movingUp = true;
+        // }
 
     
-        // Horizontal movement
-        float moveDirection = 0;
+        // // Horizontal movement
+        // float moveDirection = 0;
 
-        if (isMovingLeft)
-        {
-            moveDirection = -moveSpeed;
-        }
+        // if (isMovingLeft)
+        // {
+        //     moveDirection = -moveSpeed;
+        // }
 
-        else if (isMovingRight)
-        {
-            moveDirection = moveSpeed;
-        }
+        // else if (isMovingRight)
+        // {
+        //     moveDirection = moveSpeed;
+        // }
 
-        // Apply horizontal movement
-        rb.velocity = new Vector2(moveDirection, rb.velocity.y);
+        // // Apply horizontal movement
+        // rb.velocity = new Vector2(moveDirection, rb.velocity.y);
     }
 
     // Update is called once per frame

@@ -95,7 +95,7 @@ Rigidbody2D:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4957248942082319922}
-  m_BodyType: 1
+  m_BodyType: 0
   m_Simulated: 1
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0
@@ -134,6 +134,9 @@ MonoBehaviour:
   floatSpeed: 1
   floatDistance: 0.5
   moveSpeed: 2
+  targetPlate: {fileID: 0}
+  offsetRange: 2
+  directionVariation: 10
   isMovingLeft: 0
   isMovingRight: 1
 --- !u!61 &-7177170667451783378
