@@ -59,56 +59,12 @@ public class IngrediantLogic : MonoBehaviour
             // Apply movement
             rb.velocity = direction * moveSpeed;
         }
-
-        // // Floating Effect - Adjust Rigidbody2D velocity up and down
-        // if (movingUp)
-        // {
-        //     rb.velocity = new Vector2(rb.velocity.x, floatStrength);
-        // }
-        // else
-        // {
-        //     rb.velocity = new Vector2(rb.velocity.x, -floatStrength / 2); // Make downward motion slower
-        // }
-
-        // // Toggle direction based on floating range
-        // if (transform.position.y > startPosition.y + floatDistance)
-        // {
-        //     movingUp = false;
-        // }
-        // else if (transform.position.y < startPosition.y - floatDistance)
-        // {
-        //     movingUp = true;
-        // }
-
-    
-        // // Horizontal movement
-        // float moveDirection = 0;
-
-        // if (isMovingLeft)
-        // {
-        //     moveDirection = -moveSpeed;
-        // }
-
-        // else if (isMovingRight)
-        // {
-        //     moveDirection = moveSpeed;
-        // }
-
-        // // Apply horizontal movement
-        // rb.velocity = new Vector2(moveDirection, rb.velocity.y);
     }
 
     // Update is called once per frame
     void Update()
     {
-        
-    
-        // Force
-        // if (Input.GetMouseButtonDown(0))
-        // {
-        //     Debug.Log("Mouse Click Detected - Applying Force!");
-        //     AddForceUp();
-        // }
+
     }
     private void OnMouseDown(){
         startTouchPosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
@@ -168,6 +124,8 @@ public class IngrediantLogic : MonoBehaviour
     {
         transform.SetParent(plate.transform);  //Ingredient become parent of the plate
         rb.velocity = Vector2.zero;
+        rb.angularVelocity = 0f; // Stops the ingrediants from spinning when adding into the plate
+        //transform.rotation = Quaternion.Euler(0f,0f,0f); // <-- Makes the ingrediants add into the plate upright, but the weird rotations looks quite cartoonish IMO
         AddedtoPlate = true;
         rb.isKinematic = true; // Prevent further physics interactions
         transform.localPosition = new Vector3(0f, 0f, 0f);  // You can adjust the x and y values for offset
@@ -178,9 +136,4 @@ public class IngrediantLogic : MonoBehaviour
             rb.AddForce(new Vector2(0, 15), ForceMode2D.Impulse);
         }
 
-
-    // void OnMouseDown()
-    // {
-    //     Destroy(gameObject); // Destroys the object on click
-    // }
 }
