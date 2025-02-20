@@ -13,7 +13,7 @@ public class IngrediantLogic : MonoBehaviour
     [SerializeField] private float maxDragDistance;
 
     private bool AddedtoPlate;  
-    [SerializeField] private float minVelocity;
+    private float minVelocity = 4f;
 
     [Header("Floating")]
     public float floatStrength = 0.5f; // Controls how high the ingredient floats
@@ -27,6 +27,8 @@ public class IngrediantLogic : MonoBehaviour
     public float offsetRange = 2f;
     public float directionVariation = 10f;
     private Vector2 targetOffset;
+
+    private Plate plate_Script;
     
     
     [Header("Movement & Physics")]
@@ -67,8 +69,13 @@ public class IngrediantLogic : MonoBehaviour
 
     }
     private void OnMouseDown(){
-        startTouchPosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-        isDragging = true;
+
+        if(AddedtoPlate == false)
+        {
+            startTouchPosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+            isDragging = true;
+        }
+        
     }
     private void OnMouseUp(){
         if(isDragging){
@@ -122,14 +129,32 @@ public class IngrediantLogic : MonoBehaviour
 
     private void AddToPlate(GameObject plate)
     {
-        transform.SetParent(plate.transform);  //Ingredient become parent of the plate
-        rb.velocity = Vector2.zero;
-        rb.angularVelocity = 0f; // Stops the ingrediants from spinning when adding into the plate
-        //transform.rotation = Quaternion.Euler(0f,0f,0f); // <-- Makes the ingrediants add into the plate upright, but the weird rotations looks quite cartoonish IMO
-        AddedtoPlate = true;
-        rb.isKinematic = true; // Prevent further physics interactions
-        transform.localPosition = new Vector3(0f, 0f, 0f);  // You can adjust the x and y values for offset
-        Debug.Log("Ingredient added to the plate!");
+        plate_Script = plate.GetComponent<Plate>(); //Retrieve plate script
+
+        //Add Ingredient to the plate game object
+        int ingredientPosition = plate_Script.CheckPlateLoad();
+
+        if(ingredientPosition != 707)
+        {
+            //Update the plate inventory
+            plate_Script.AddIngredienttoPlate(gameObject, ingredientPosition);  //Add current gameobject(ingredient) to script
+            
+            //Physics Polishing when in Plate
+            rb.velocity = Vector2.zero;
+            rb.angularVelocity = 0f; // Stops the ingrediants from spinning when adding into the plate
+                                     //transform.rotation = Quaternion.Euler(0f,0f,0f); // <-- Makes the ingrediants add into the plate upright, but the weird rotations looks quite cartoonish IMO
+            AddedtoPlate = true;
+            rb.isKinematic = true; // Prevent further physics interactions
+            transform.localPosition = new Vector3(0f, 0f, 0f);  // You can adjust the x and y values for offset
+            Debug.Log("Ingredient added to the plate!");
+        }
+
+        else
+        {
+            Debug.Log("Plate Full!!");
+        }
+
+        
     }
     void AddForceUp()
         {

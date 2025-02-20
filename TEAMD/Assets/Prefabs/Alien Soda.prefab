@@ -129,7 +129,7 @@ MonoBehaviour:
   flickForceMultiplier: 2
   dragSpeed: 2
   maxDragDistance: 2
-  minVelocity: 10
+  minVelocity: 4
   floatStrength: 0.5
   floatSpeed: 1
   floatDistance: 0.5
