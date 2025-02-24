@@ -6,7 +6,7 @@ public class IngredientSpawner : MonoBehaviour
 {
     public List<GameObject> ingredients;
     public List<Vector3> spawnPoints;
-    public float spawnrate = 0.5f; //based off timer in other script, apply multiplier
+    public float spawnrate = 0.8f; //based off timer in other script, apply multiplier
 
 
     // Start is called before the first frame update
