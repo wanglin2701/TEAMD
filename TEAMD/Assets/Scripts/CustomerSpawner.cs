@@ -52,14 +52,8 @@ public class CustomerSpawner : MonoBehaviour
                 customerScript.spawnPoint = spawn;
 
                 //generate & display order
-                List<GameObject> order = OrderManager.instance.GenerateOrder(spawn);
-                int i = 0;
-                foreach(GameObject ingredient in order)
-                {
-                    customerScript.orderArray[i] = ingredient;
-                    i++;
-                }
-                OrderManager.instance.DisplayOrder(spawn, order);
+                customerScript.orderArray = OrderManager.instance.GenerateOrder(spawn).ToArray<GameObject>();
+                OrderManager.instance.DisplayOrder(spawn, customerScript.orderArray.ToList<GameObject>());
 
                 //add customer to occupied dictionary
                 occupiedSeats.Add(spawn, newCustomer);
