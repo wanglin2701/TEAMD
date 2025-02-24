@@ -6,19 +6,32 @@ using TMPro;
 
 public class GameManager : MonoBehaviour
 {
-    
+    public static GameManager instance;
     public float levelTime = 181f; // Can change anytime, testing purpose I put 3 minutes in seconds
     public TextMeshProUGUI timerText;
     private bool isLevelOver = false;
 
     private UIManager uiManager;
     private Strikes strikesManager;
+    private Score scoreManager;
 
+    void Awake()
+    {
+        if(instance == null)
+        {
+            instance = this;
+        }
+        else
+        {
+            Destroy(gameObject);
+        }
+    }
 
     void Start()
     {
         uiManager = FindObjectOfType<UIManager>();
         strikesManager = FindObjectOfType<Strikes>();
+        scoreManager = FindObjectOfType<Score>();
         StartCoroutine(LevelCountdown());
     }
 
@@ -54,5 +67,10 @@ public class GameManager : MonoBehaviour
     public void AddStrike()
     {
         strikesManager.AddStrike();
+    }
+
+    public void AddScore(int points)
+    {
+        scoreManager.AddPoints(points);
     }
 }

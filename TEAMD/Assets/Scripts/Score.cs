@@ -5,12 +5,12 @@ using UnityEngine.UI;
 
 public class Score : MonoBehaviour
 {
-    // public Text scoreText;
-    // private int score = 0;
+    public Text scoreText;
+    private int score = 0;
 
-    // public void AddPoints(int points)
-    // {
-    //     score += points;
-    //     scoreText.text = "Score: " + score;
-    // }
+    public void AddPoints(int points)
+    {
+        score += points;
+        scoreText.text = "Score: " + score;
+    }
 }

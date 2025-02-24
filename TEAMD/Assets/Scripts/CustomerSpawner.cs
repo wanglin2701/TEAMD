@@ -23,6 +23,12 @@ public class CustomerSpawner : MonoBehaviour
             Destroy(gameObject);
         }
     }
+    
+    void Start()
+    {
+        InvokeRepeating(nameof(SpawnCustomer), 3f, 50f);
+    }
+    
 
     public void SpawnCustomer()
     {
@@ -39,14 +45,20 @@ public class CustomerSpawner : MonoBehaviour
             {
                 //randomize customer selection
                 GameObject newCustomer = Instantiate(customers[Random.Range(0, customers.Length)]);
+                //NEED TO SPAWN CUSTOMER AT SET PLACES USE SPAWNLOC[]
 
-                //NEEDS TO ALIGN WITH SERENE'S CUSTOMER.CS FIRST
                 //assign spawn point to customer
-                //Customer customerScript = newCustomer.GetComponent<Customer>();
-                //customerScript.spawnPoint = spawn;
+                Customer customerScript = newCustomer.GetComponent<Customer>();
+                customerScript.spawnPoint = spawn;
 
                 //generate & display order
                 List<GameObject> order = OrderManager.instance.GenerateOrder(spawn);
+                int i = 0;
+                foreach(GameObject ingredient in order)
+                {
+                    customerScript.orderArray[i] = ingredient;
+                    i++;
+                }
                 OrderManager.instance.DisplayOrder(spawn, order);
 
                 //add customer to occupied dictionary

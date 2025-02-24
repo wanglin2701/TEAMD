@@ -5,25 +5,24 @@ using UnityEngine;
 //base for normal customer
 public class Customer : MonoBehaviour
 {
-    int SpawnPoint;
+    public int spawnPoint;
     public enum BehaviourType { Impatient, OrderChanger, VIP }
 
     [Header("Customer Settings")]
     public float patienceMeterMax; // Max patience
-    public float patienceMeter;    // Current patience
+    protected float patienceMeter;    // Current patience
     public const float patienceDepletionRate = 1f; // Depletion rate 
     public int scoreReward;        // Score given upon order completion
     public BehaviourType behaviourType;
 
     [Header("Order System")]
-    public string[] orderArray; // Array for storing the customer's order
+    public GameObject[] orderArray; // Array for storing the customer's order
 
     private bool isServed = false;
 
     protected virtual void Start()
     {
         patienceMeter = patienceMeterMax;
-        GenerateOrder();
     }
 
     protected virtual void Update()
@@ -45,20 +44,20 @@ public class Customer : MonoBehaviour
 
     protected virtual void GenerateOrder()
     {
-       // orderArray = OrderManager.GenerateOrder(); // call from order manager script
+       //orderArray = OrderManager.instance.GenerateOrder(); // call from order manager script
     }
 
-    public virtual void ServeOrder(string[] playerOrder)
+    public virtual void ServeOrder(GameObject[] playerOrder)
     {
         if (OrderMatches(playerOrder))
         {
             isServed = true;
-           // Score.AddScore(scoreReward); // call from score script
+            GameManager.instance.AddScore(scoreReward); // call from gameManager script
             CustomerLeaves();
         }
     }
 
-    protected virtual bool OrderMatches(string[] playerOrder)
+    protected virtual bool OrderMatches(GameObject[] playerOrder)
     {
         if (playerOrder.Length != orderArray.Length) return false;
 
@@ -72,6 +71,7 @@ public class Customer : MonoBehaviour
 
     protected virtual void CustomerLeaves()
     {
-        Destroy(gameObject); // Customer leaves 
+        Destroy(gameObject); // Customer leaves
+        CustomerSpawner.instance.DespawnCustomer(spawnPoint);
     }
 }
