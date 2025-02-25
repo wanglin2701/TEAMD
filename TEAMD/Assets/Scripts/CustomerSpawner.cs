@@ -32,33 +32,41 @@ public class CustomerSpawner : MonoBehaviour
 
     public void SpawnCustomer()
     {
-        //if enough customers at table, do not spawn
-        if(occupiedSeats.Count >= 3)
-        {
-            return;
-        }
+        if (occupiedSeats.Count >= 3) return;
 
-        //check empty seats
-        foreach(int spawn in spawnPoints)
+        // Prioritize spawn order: 1 → 2 → 3
+        List<int> availableSeats = new List<int>();
+        if (!occupiedSeats.ContainsKey(1)) availableSeats.Add(1);
+        if (!occupiedSeats.ContainsKey(2)) availableSeats.Add(2);
+        if (!occupiedSeats.ContainsKey(3)) availableSeats.Add(3);
+
+        if (availableSeats.Count == 0) return;
+
+        // Always pick the lowest available seat number (1 first, then 2, then 3)
+        int selectedSpawn = availableSeats[0];
+
+        GameObject newCustomer = Instantiate(customers[UnityEngine.Random.Range(0, customers.Length)]);
+        Customer customerScript = newCustomer.GetComponent<Customer>();
+        customerScript.spawnPoint = selectedSpawn;
+
+        customerScript.orderArray = OrderManager.instance.GenerateOrder(selectedSpawn).ToArray();
+
+        List<Sprite> orderSprites = new List<Sprite>();
+        foreach (GameObject ingredient in customerScript.orderArray)
         {
-            if(!occupiedSeats.ContainsKey(spawn))
+            if (ingredient != null) 
             {
-                //randomize customer selection
-                GameObject newCustomer = Instantiate(customers[Random.Range(0, customers.Length)]);
-                //NEED TO SPAWN CUSTOMER AT SET PLACES USE SPAWNLOC[]
-
-                //assign spawn point to customer
-                Customer customerScript = newCustomer.GetComponent<Customer>();
-                customerScript.spawnPoint = spawn;
-
-                //generate & display order
-                customerScript.orderArray = OrderManager.instance.GenerateOrder(spawn).ToArray<GameObject>();
-                OrderManager.instance.DisplayOrder(spawn, customerScript.orderArray.ToList<GameObject>());
-
-                //add customer to occupied dictionary
-                occupiedSeats.Add(spawn, newCustomer);
+                SpriteRenderer spriteRenderer = ingredient.GetComponent<SpriteRenderer>();
+                if (spriteRenderer != null)
+                {
+                    orderSprites.Add(spriteRenderer.sprite);
+                }
             }
         }
+
+        // Now, it will always display OrderBubble1 first if possible
+        OrderManager.instance.DisplayOrder(selectedSpawn, orderSprites);
+        occupiedSeats.Add(selectedSpawn, newCustomer);
     }
 
     //call this when patience runs out or order is fulfilled

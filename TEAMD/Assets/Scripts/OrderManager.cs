@@ -1,4 +1,3 @@
-using System;
 using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
@@ -28,74 +27,66 @@ public class OrderManager : MonoBehaviour
 
     public List<GameObject> GenerateOrder(int spawnPoint)
     {
-        //clear order from before
         order.Clear();
 
-        //max amount of ingredients in an order is 3
-        for(int i = 0; i < 3; i++)
+        while (order.Count < 3) 
         {
-            //based on luck, add nothing
-            if(UnityEngine.Random.Range(0, 10) <= 4)
-            {
-                order.Add(null);
-            }
-            else //add ingredient
-            {
-                order.Add(ingredients[UnityEngine.Random.Range(0, ingredients.Length)]);
-            }
+            GameObject ingredient = ingredients[UnityEngine.Random.Range(0, ingredients.Length)]; // Explicitly using UnityEngine.Random
+            order.Add(ingredient);
         }
 
-        //check if everything is blank
-        bool blank = true;
-        foreach(GameObject ingredient in order)
-        {
-            if(ingredient != null)
-            {
-                blank = false;
-                break;
-            }
-        }
-
-        //do not pass blank orders
-        if(blank)
-        {
-            GenerateOrder(spawnPoint);
-        }
         return order;
     }
 
     //called when customer is spawned, creates orders visually
-    public void DisplayOrder(int spawn, List<GameObject> order)
+    public void DisplayOrder(int spawn, List<Sprite> orderSprites)
     {
         int i = 0;
         switch(spawn)
         {
             case 1:
-            orderBubble1.SetActive(true);
-            foreach(GameObject ingredient in order)
-            {
-                orderIngredients1.Add(Instantiate(ingredient, ingBubblePoints1[i], Quaternion.identity));
-                i++;
-            }
-            break;
+                Debug.Log("Displaying order at Bubble 1");
+                orderBubble1.SetActive(true);
+                foreach(Sprite sprite in orderSprites)
+                {
+                    GameObject ingredientImage = new GameObject("IngredientSprite");
+                    SpriteRenderer renderer = ingredientImage.AddComponent<SpriteRenderer>();
+                    renderer.sprite = sprite;
+                    ingredientImage.transform.position = ingBubblePoints1[i];
+                    i++;
+                }
+                break;
 
             case 2:
-            orderBubble2.SetActive(true);
-            foreach(GameObject ingredient in order)
-            {
-                orderIngredients2.Add(Instantiate(ingredient, ingBubblePoints2[i], Quaternion.identity));
-                i++;
-            }
-            break;
+                Debug.Log("Displaying order at Bubble 2");
+                orderBubble2.SetActive(true);
+                foreach(Sprite sprite in orderSprites)
+                {
+                    GameObject ingredientImage = new GameObject("IngredientSprite");
+                    SpriteRenderer renderer = ingredientImage.AddComponent<SpriteRenderer>();
+                    renderer.sprite = sprite;
+                    ingredientImage.transform.position = ingBubblePoints2[i];
+                    i++;
+                }
+                break;
 
             case 3:
-            orderBubble3.SetActive(true);
-            foreach(GameObject ingredient in order)
-            {
-                orderIngredients3.Add(Instantiate(ingredient, ingBubblePoints3[i], Quaternion.identity));
-                i++;
-            }
-            break;
+                Debug.Log("Displaying order at Bubble 3"); // Debugging if it reaches this case
+                orderBubble3.SetActive(true);
+                foreach(Sprite sprite in orderSprites)
+                {
+                    Debug.Log($"Ingredient {i} in Order Bubble 3: {sprite.name}"); // Debugging sprites
+                    GameObject ingredientImage = new GameObject("IngredientSprite");
+                    SpriteRenderer renderer = ingredientImage.AddComponent<SpriteRenderer>();
+                    renderer.sprite = sprite;
+                    ingredientImage.transform.position = ingBubblePoints3[i];
+                    i++;
+                }
+                break;
+
+            default:
+                Debug.LogWarning($"Invalid spawn point {spawn} passed to DisplayOrder()");
+                break;
         }
     }
 
