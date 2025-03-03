@@ -37,7 +37,7 @@ public class Customer : MonoBehaviour
         patienceMeter = patienceMeterMax;
         customerMaxPatienceVar = customerPatience;
         gameManager = FindObjectOfType<GameManager>();
-        SpawnPatienceBar();
+        //SpawnPatienceBar();
     }
 
     protected virtual void Update()
@@ -60,32 +60,6 @@ public class Customer : MonoBehaviour
     }
 
     #region PATIENCE BAR
-
-    private void SpawnPatienceBar()
-    {
-        GameObject patienceBarObject = GameObject.Find("PatienceBar"); // Find patience bar in scene
-
-        if (patienceBarObject != null)
-        {
-            patienceBarInstance = Instantiate(patienceBarObject, transform); // Clone patience bar for each customer
-            patienceBarInstance.transform.SetParent(this.transform, false); // Attach it to the customer
-            patienceBarInstance.transform.localPosition = new Vector3(-1.5f, 0, 0); // Adjust position
-            
-            
-            bar = patienceBarInstance.transform.Find("PatienceBar Container/PatienceBar Anchor"); 
-            barFill = patienceBarInstance.transform.Find("PatienceBar Container/PatienceMeter").GetComponent<Image>();
-
-            if (bar == null || barFill == null)
-            {
-                Debug.LogError("Patience bar components not found! Ensure the patience bar has a 'Bar' transform and an Image.");
-            }
-        }
-
-        else
-        {
-            Debug.LogError("Patience Bar object not found in the scene! Make sure it's named 'PatienceBar'.");
-        }
-    }
 
      private void DestroyPatienceBar()
     {
@@ -144,11 +118,6 @@ public class Customer : MonoBehaviour
             ServeOrder(plate.GetIngredients()); 
             Destroy(collision.gameObject); 
         }
-    }
-
-    protected virtual void GenerateOrder()
-    {
-       //orderArray = OrderManager.instance.GenerateOrder(); // call from order manager script
     }
 
     public virtual void ServeOrder(GameObject[] playerOrder)

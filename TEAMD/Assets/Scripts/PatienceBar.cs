@@ -12,13 +12,16 @@ public class PatienceBar : MonoBehaviour
     private float customerMaxPatienceVar;
     private bool isStriked = false;
     private GameManager gameManager;
+    public Customer customer;
 
     
     // Start is called before the first frame update
     void Start()
     {
-        customerMaxPatienceVar = customerPatience;
+        customer = GetComponent<Customer>();
+        customer.patienceMeterMax = customerPatience;
         gameManager = FindObjectOfType<GameManager>();
+    
     }
 
     // Update is called once per frame
@@ -27,7 +30,7 @@ public class PatienceBar : MonoBehaviour
         if (!isStriked)
         {
             customerPatience -= Time.deltaTime;
-            SetCustomerPatienceState(customerPatience, customerMaxPatienceVar);
+            SetCustomerPatienceState(customerPatience, customer.patienceMeterMax);
             SetPatienceBarColor();    
         }
 
@@ -50,8 +53,8 @@ public class PatienceBar : MonoBehaviour
         
     }
     void SetPatienceBarColor(){
-        float yellowPatience = customerMaxPatienceVar * 0.6f;
-        float redPatience = customerMaxPatienceVar * 0.25f;
+        float yellowPatience = customer.patienceMeterMax * 0.6f;
+        float redPatience = customer.patienceMeterMax * 0.25f;
         //Debug.Log(customerPatience);
         if(customerPatience <= redPatience){
             barFill.color = Color.red;
