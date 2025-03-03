@@ -18,8 +18,8 @@ public class PatienceBar : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        customer = GetComponent<Customer>();
-        customer.patienceMeterMax = customerPatience;
+        customer = GetComponentInParent<Customer>();
+        customerPatience = customer.patienceMeterMax;
         gameManager = FindObjectOfType<GameManager>();
     
     }
