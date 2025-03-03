@@ -88,13 +88,17 @@ public class OrderManager : MonoBehaviour
     public void DisplayOrder(int spawn, List<GameObject> order)
     {
         int i = 0;
+
         switch(spawn)
         {
             case 1:
             orderBubble1.SetActive(true);
             foreach(GameObject ingredient in order)
             {
-                orderIngredients1.Add(Instantiate(ingredient, ingBubblePoints1[i], Quaternion.identity));
+                GameObject ingreDisplay = Instantiate(ingredient, ingBubblePoints1[i], Quaternion.identity);
+                RemoveIngredientStuff(ingreDisplay);
+                ingreDisplay.transform.localScale = new Vector3(0.5f, 0.5f, 0.5f);
+                orderIngredients1.Add(ingreDisplay);
                 i++;
             }
             break;
@@ -103,7 +107,10 @@ public class OrderManager : MonoBehaviour
             orderBubble2.SetActive(true);
             foreach(GameObject ingredient in order)
             {
-                orderIngredients2.Add(Instantiate(ingredient, ingBubblePoints2[i], Quaternion.identity));
+                GameObject ingreDisplay = Instantiate(ingredient, ingBubblePoints2[i], Quaternion.identity);
+                RemoveIngredientStuff(ingreDisplay);
+                ingreDisplay.transform.localScale = new Vector3(0.5f, 0.5f, 0.5f);
+                orderIngredients2.Add(ingreDisplay);
                 i++;
             }
             break;
@@ -112,11 +119,24 @@ public class OrderManager : MonoBehaviour
             orderBubble3.SetActive(true);
             foreach(GameObject ingredient in order)
             {
-                orderIngredients3.Add(Instantiate(ingredient, ingBubblePoints3[i], Quaternion.identity));
+                GameObject ingreDisplay = Instantiate(ingredient, ingBubblePoints3[i], Quaternion.identity);
+                RemoveIngredientStuff(ingreDisplay);
+                ingreDisplay.transform.localScale = new Vector3(0.5f, 0.5f, 0.5f);
+                orderIngredients3.Add(ingreDisplay);
                 i++;
             }
             break;
         }
+    }
+
+    void RemoveIngredientStuff(GameObject ingredient)
+    {
+        Rigidbody2D rb = ingredient.GetComponent<Rigidbody2D>();
+        Collider2D collider = ingredient.GetComponent<Collider2D>();
+        IngrediantLogic script = ingredient.GetComponent<IngrediantLogic>();
+        Destroy(rb);
+        Destroy(collider);
+        Destroy(script);
     }
 
     //called when customer despawns, deletes orders visually
