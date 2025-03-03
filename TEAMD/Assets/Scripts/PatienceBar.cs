@@ -6,8 +6,8 @@ using UnityEngine.UI;
 public class PatienceBar : MonoBehaviour
 {
     //[SerializeField] GameObject customerPatienceBar; might need this container holder when applying it with customer objects who knows
-    [SerializeField] Transform bar;
-    [SerializeField] Image barFill;
+    [SerializeField] Transform barAnchor;
+    [SerializeField] SpriteRenderer barFill;
     [SerializeField] float customerPatience;
     private float customerMaxPatienceVar;
     private bool isStriked = false;
@@ -45,7 +45,7 @@ public class PatienceBar : MonoBehaviour
         if(state < 0){
             state = 0f;
         }
-        bar.transform.localScale = new Vector3(bar.localScale.x, state, 1f);
+        barAnchor.transform.localScale = new Vector3(barAnchor.localScale.x, state, 1f);
         
         
     }
