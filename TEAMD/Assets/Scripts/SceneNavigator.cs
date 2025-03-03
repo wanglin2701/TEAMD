@@ -7,10 +7,8 @@ using UnityEngine.UI;
 public class SceneNavigator : MonoBehaviour
 {
     private GameObject HowtoPlay_screen;
-    private Button[] TitleScreen_BTNS;
-    private Button PlayBTN;
-    private Button HowtoPlayBTN;
-    private Button QuitBTN;
+    private GameObject Gameover_screen;
+    private GameObject CompleteLevel_screen;
 
     // Start is called before the first frame update
     void Start()
@@ -19,6 +17,15 @@ public class SceneNavigator : MonoBehaviour
         {
             HowtoPlay_screen = GameObject.Find("HowtoPlay");
             HowtoPlay_screen.SetActive(false);
+        }
+
+        else if(SceneManager.GetActiveScene().name == "GameUI")
+        {
+            Gameover_screen = GameObject.Find("LevelFailScreen");
+            Gameover_screen.SetActive(false);
+
+            CompleteLevel_screen = GameObject.Find("LevelCompleteScreen");
+            CompleteLevel_screen.SetActive(false);
         }
     }
 
@@ -36,11 +43,18 @@ public class SceneNavigator : MonoBehaviour
 
     public void PlayGame()
     {
+        Gameover_screen.SetActive(false);
+        CompleteLevel_screen.SetActive(false);
         SceneManager.LoadScene("GameUI");
     }
 
     public void QuitGame()
     {
         Application.Quit();
+    }
+
+    public void GoTitleScreen()
+    {
+        SceneManager.LoadScene("TitleScreen");
     }
 }
