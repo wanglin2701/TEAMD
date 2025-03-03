@@ -400,4 +400,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   barAnchor: {fileID: 7244271067944531327}
   barFill: {fileID: 6568468927758974521}
-  customerPatience: 15
+  customerPatience: 0
+  customer: {fileID: 0}
