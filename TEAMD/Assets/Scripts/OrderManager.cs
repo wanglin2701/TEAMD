@@ -1,4 +1,3 @@
-using System;
 using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
@@ -7,9 +6,6 @@ using UnityEngine;
 public class OrderManager : MonoBehaviour
 {
     public static OrderManager instance;
-    [Header("Ingredients")]
-    List<GameObject> order = new List<GameObject>();
-    public GameObject[] ingredients; //assign in inspector
 
     [Header("Order Bubbles")]
     public GameObject orderBubble1; public GameObject orderBubble2; public GameObject orderBubble3; //assign in inspector
@@ -26,40 +22,64 @@ public class OrderManager : MonoBehaviour
         else { Destroy(gameObject); }
     }
 
+    void Start()
+    {
+        orderBubble1.SetActive(false);
+        orderBubble2.SetActive(false);
+        orderBubble3.SetActive(false);
+    }
+
     public List<GameObject> GenerateOrder(int spawnPoint)
     {
-        //clear order from before
-        order.Clear();
+        List<GameObject> order = new List<GameObject>();
+        List<string> validRecipes = new List<string>();
 
-        //max amount of ingredients in an order is 3
-        for(int i = 0; i < 3; i++)
+        //sort through which difficulty recipes according to the time
+        foreach(Recipe recipe in DataManager.instance.recipeData.Values)
         {
-            //based on luck, add nothing
-            if(UnityEngine.Random.Range(0, 10) <= 4)
+            int ingredientCount = recipe.ParseIngredients().Count;
+
+            //game in 3-2 minute countdown, still easy mode
+            if(GameManager.instance.levelTime <= 181 && GameManager.instance.levelTime > 120)
             {
-                order.Add(null);
+                if(ingredientCount == 1)
+                {
+                    validRecipes.Add(recipe.id);
+                }
             }
-            else //add ingredient
+            //game in 2-1 minute countdown, medium mode
+            else if (GameManager.instance.levelTime <= 120 && GameManager.instance.levelTime > 60)
             {
-                order.Add(ingredients[UnityEngine.Random.Range(0, ingredients.Length)]);
+                if(ingredientCount == 2)
+                {
+                    validRecipes.Add(recipe.id);
+                }
+            }
+            else //game less than 60 seconds left, hard mode
+            {
+                if(ingredientCount== 3)
+                {
+                    validRecipes.Add(recipe.id);
+                }
             }
         }
 
-        //check if everything is blank
-        bool blank = true;
-        foreach(GameObject ingredient in order)
-        {
-            if(ingredient != null)
-            {
-                blank = false;
-                break;
-            }
-        }
+        //select random recipe from dictionary
+        string randomRecipeKey = validRecipes[Random.Range(0, validRecipes.Count)];
+        Recipe selectedRecipe = DataManager.instance.recipeData[randomRecipeKey];
 
-        //do not pass blank orders
-        if(blank)
+        //retrieve ingredient IDs from recipe
+        List<string> ingredientIDs = selectedRecipe.ParseIngredients();
+
+        foreach(string id in ingredientIDs)
         {
-            GenerateOrder(spawnPoint);
+            if(DataManager.instance.ingredientData.TryGetValue(id, out Ingredient ingredientInfo))
+            {
+                if(DataManager.instance.ingredientPrefabs.TryGetValue(ingredientInfo.name, out GameObject ingredientPrefab))
+                {
+                    order.Add(ingredientPrefab);
+                }
+            }
         }
         return order;
     }
