@@ -126,10 +126,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4e8bcf55c5e654940b7b0ff2305295e4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  flickForceMultiplier: 2
+  flickForceMultiplier: 0.5
   dragSpeed: 2
   maxDragDistance: 2
-  minVelocity: 4
   floatStrength: 0.5
   floatSpeed: 1
   floatDistance: 0.5
@@ -137,8 +136,6 @@ MonoBehaviour:
   targetPlate: {fileID: 0}
   offsetRange: 2
   directionVariation: 10
-  isMovingLeft: 0
-  isMovingRight: 1
 --- !u!61 &5107866973253314503
 BoxCollider2D:
   m_ObjectHideFlags: 0
