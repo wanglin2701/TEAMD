@@ -114,7 +114,19 @@ public class Plate : MonoBehaviour
 
             }
         }
-
-
     }
+
+    public GameObject[] GetIngredients()
+    {
+        List<GameObject> ingredients = new List<GameObject>();
+        for (int i = 0; i < PlateInventory.Length; i++)
+        {
+            if (PlateInventory[i] != null)
+            {
+                ingredients.Add(PlateInventory[i]);
+            }
+        }
+        return ingredients.ToArray();
+    }
+
 }
