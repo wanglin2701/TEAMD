@@ -131,7 +131,8 @@ public class Customer : MonoBehaviour
 
         else 
         {
-            gameManager.AddStrike(); 
+            gameManager.AddStrike();
+            CustomerLeaves(); 
         }
     }
 

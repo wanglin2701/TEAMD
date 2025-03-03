@@ -29,6 +29,21 @@ public class Plate : MonoBehaviour
             Debug.Log("Clear Plate");
             ClearPlate();
         }
+
+        // Check if the plate collides with a customer
+        if (collision.gameObject.CompareTag("Customer") && collision.isTrigger)
+        {
+            Debug.Log("Plate touched the customer");
+            
+            // Serve the order to the customer
+            Customer customer = collision.gameObject.GetComponent<Customer>();
+            if (customer != null)
+            {
+                // Pass the plate ingredients to the customer to check if the order is correct
+                customer.ServeOrder(GetIngredients());
+                ClearPlate(); // Clear the ingredients from the plate
+            }
+        }
     }
 
 
@@ -128,5 +143,7 @@ public class Plate : MonoBehaviour
         }
         return ingredients.ToArray();
     }
+
+    
 
 }

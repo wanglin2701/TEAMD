@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 5628207642994778345}
   m_Layer: 0
   m_Name: Customer_1
-  m_TagString: Untagged
+  m_TagString: Customer
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -401,3 +401,4 @@ MonoBehaviour:
   barAnchor: {fileID: 7244271067944531327}
   barFill: {fileID: 6568468927758974521}
   customerPatience: 15
+  customer: {fileID: 0}
