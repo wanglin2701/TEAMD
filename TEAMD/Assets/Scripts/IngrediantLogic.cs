@@ -73,11 +73,15 @@ public class IngrediantLogic : MonoBehaviour
         }
     }
     private void OnMouseDown(){
-        isDragging = true;
-        rb.isKinematic = true; // Temporarily disable physics
-        startDragPosition = transform.position; // Save initial click position
-        lastMousePosition = GetMouseWorldPos();
-        offset = transform.position - lastMousePosition;
+
+        if(AddedtoPlate == false)
+        {
+            isDragging = true;
+            rb.isKinematic = true; // Temporarily disable physics
+            startDragPosition = transform.position; // Save initial click position
+            lastMousePosition = GetMouseWorldPos();
+            offset = transform.position - lastMousePosition;
+        }
 
         // if(AddedtoPlate == false)
         // {
@@ -87,10 +91,16 @@ public class IngrediantLogic : MonoBehaviour
         
     }
     private void OnMouseUp(){
-        isDragging = false;
-        rb.isKinematic = false; // Re-enable physics
-        velocity = (GetMouseWorldPos() - lastMousePosition) / Time.deltaTime;
-        rb.velocity = velocity * flickForceMultiplier;
+     
+
+        if (AddedtoPlate == false)
+        {
+            isDragging = false;
+            rb.isKinematic = false; // Re-enable physics
+            velocity = (GetMouseWorldPos() - lastMousePosition) / Time.deltaTime;
+            rb.velocity = velocity * flickForceMultiplier;
+        }
+
         // if(isDragging){
         //     endTouchPosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
 
@@ -104,17 +114,24 @@ public class IngrediantLogic : MonoBehaviour
     {
         if (!isDragging) return;
 
-        Vector3 targetPosition = GetMouseWorldPos() + offset;
+       
 
-        // 🔹 Apply movement limit based on radius
-        float distanceFromStart = Vector3.Distance(startDragPosition, targetPosition);
-        if (distanceFromStart > maxDragRadius)
+        if (AddedtoPlate == false)
         {
-            // Clamp position within max radius
-            targetPosition = startDragPosition + (targetPosition - startDragPosition).normalized * maxDragRadius;
+            Vector3 targetPosition = GetMouseWorldPos() + offset;
+
+            // 🔹 Apply movement limit based on radius
+            float distanceFromStart = Vector3.Distance(startDragPosition, targetPosition);
+            if (distanceFromStart > maxDragRadius)
+            {
+                // Clamp position within max radius
+                targetPosition = startDragPosition + (targetPosition - startDragPosition).normalized * maxDragRadius;
+            }
+
+            rb.position = targetPosition; // Directly update position
         }
 
-        rb.position = targetPosition; // Directly update position
+
         // if (isDragging)
         // {
         //     // Get the current mouse position

@@ -43,56 +43,56 @@ public class Customer : MonoBehaviour
     protected virtual void Update()
     {
         HandlePatience();
-        if (!isStriked)
-        {
-            customerPatience -= Time.deltaTime;
-            SetCustomerPatienceState(customerPatience, customerMaxPatienceVar);
-            SetPatienceBarColor();    
-        }
+        //if (!isStriked)
+        //{
+        //    customerPatience -= Time.deltaTime;
+        //    SetCustomerPatienceState(customerPatience, customerMaxPatienceVar);
+        //    SetPatienceBarColor();    
+        //}
 
-        if (customerPatience <= 0 && !isStriked)
-        {
-            isStriked = true;
-            gameManager.AddStrike(); // Add a strike when patience is 0
-            DestroyPatienceBar(); 
-            Destroy(gameObject); // Remove customer from scene
-        }
+        //if (customerPatience <= 0 && !isStriked)
+        //{
+        //    isStriked = true;
+        //    gameManager.AddStrike(); // Add a strike when patience is 0
+        //    DestroyPatienceBar(); 
+        //    Destroy(gameObject); // Remove customer from scene
+        //}
     }
 
-    #region PATIENCE BAR
+    //#region PATIENCE BAR
 
-     private void DestroyPatienceBar()
-    {
-        if (patienceBarInstance != null)
-        {
-            Destroy(patienceBarInstance);
-        }
-    }
+    // private void DestroyPatienceBar()
+    //{
+    //    if (patienceBarInstance != null)
+    //    {
+    //        Destroy(patienceBarInstance);
+    //    }
+    //}
 
-    void SetCustomerPatienceState(float customerCurrentPatience, float customerMaxPatience){
-        float state = (float)customerCurrentPatience;
-        state /= customerMaxPatience;
-        if(state < 0){
-            state = 0f;
-        }
-        bar.transform.localScale = new Vector3(bar.localScale.x, state, 1f);
-        
-        
-    }
-    void SetPatienceBarColor(){
-        float yellowPatience = customerMaxPatienceVar * 0.6f;
-        float redPatience = customerMaxPatienceVar * 0.25f;
-        //Debug.Log(customerPatience);
-        if(customerPatience <= redPatience){
-            barFill.color = Color.red;
+    //void SetCustomerPatienceState(float customerCurrentPatience, float customerMaxPatience){
+    //    float state = (float)customerCurrentPatience;
+    //    state /= customerMaxPatience;
+    //    if(state < 0){
+    //        state = 0f;
+    //    }
+    //    bar.transform.localScale = new Vector3(bar.localScale.x, state, 1f);
 
-        } else if(customerPatience <= yellowPatience){
-            barFill.color = Color.yellow;
 
-        }
-    }
+    //}
+    //void SetPatienceBarColor(){
+    //    float yellowPatience = customerMaxPatienceVar * 0.6f;
+    //    float redPatience = customerMaxPatienceVar * 0.25f;
+    //    //Debug.Log(customerPatience);
+    //    if(customerPatience <= redPatience){
+    //        barFill.color = Color.red;
 
-    #endregion
+    //    } else if(customerPatience <= yellowPatience){
+    //        barFill.color = Color.yellow;
+
+    //    }
+    //}
+
+    //#endregion
 
     protected virtual void HandlePatience()
     {
@@ -108,20 +108,25 @@ public class Customer : MonoBehaviour
 
     #region SERVE ORDER
 
-     // Serve order when a plate is dragged onto the customer
-    private void OnTriggerEnter2D(Collider2D collision)
-    {
-        Plate plate = collision.GetComponent<Plate>();
+    // Serve order when a plate is dragged onto the customer
+    //private void OnTriggerEnter2D(Collider2D collision)
+    //{
+    //    Debug.Log("HELLO");
 
-        if (plate != null)
-        {
-            ServeOrder(plate.GetIngredients()); 
-            Destroy(collision.gameObject); 
-        }
-    }
+    //    Plate plate = collision.GetComponent<Plate>();
+
+    //    if (plate != null)
+    //    {
+
+    //        ServeOrder(plate.GetIngredients()); 
+    //        Destroy(collision.gameObject); 
+    //    }
+    //}
 
     public virtual void ServeOrder(GameObject[] playerOrder)
     {
+
+
         if (OrderMatches(playerOrder))
         {
             isServed = true;
@@ -131,6 +136,7 @@ public class Customer : MonoBehaviour
 
         else 
         {
+            Debug.Log("hello");
             gameManager.AddStrike();
             CustomerLeaves(); 
         }
@@ -138,6 +144,18 @@ public class Customer : MonoBehaviour
 
     protected virtual bool OrderMatches(GameObject[] playerOrder)
     {
+
+        //Check Values
+        foreach(GameObject ingredients in playerOrder) 
+        {
+            Debug.Log("Player ingredient: " + ingredients);
+        }
+
+        foreach (GameObject ingredients in orderArray)
+        {
+            Debug.Log("Order ingredient: " + ingredients);
+        }
+
         if (playerOrder.Length != orderArray.Length) return false;
 
         for (int i = 0; i < orderArray.Length; i++)

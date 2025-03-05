@@ -10,6 +10,7 @@ public class Plate : MonoBehaviour
     private bool isDragging = false;
     private float x_margin = 0.105f; // Margin percentage to reduce the camera bounds
     private float y_margin = 0.19f; // Margin percentage to reduce the camera bounds
+    private bool isTriggering = false;
 
     private int maxPlateLoad = 3;
 
@@ -23,16 +24,20 @@ public class Plate : MonoBehaviour
     }
     private void OnTriggerEnter2D(Collider2D collision)
     {
+
         // Check if the collided object is the plate
-        if (collision.gameObject.CompareTag("Bin")  && collision.isTrigger)
+        if (collision.gameObject.CompareTag("Bin")  && isTriggering == false)
         {
+            isTriggering = true;
             Debug.Log("Clear Plate");
             ClearPlate();
         }
 
         // Check if the plate collides with a customer
-        if (collision.gameObject.CompareTag("Customer") && collision.isTrigger)
+        if (collision.gameObject.CompareTag("Customer") && isTriggering == false)
         {
+            isTriggering = true;
+
             Debug.Log("Plate touched the customer");
             
             // Serve the order to the customer
@@ -44,6 +49,11 @@ public class Plate : MonoBehaviour
                 ClearPlate(); // Clear the ingredients from the plate
             }
         }
+    }
+
+    private void OnTriggerExit2D(Collider2D collision)
+    {
+        isTriggering = false;
     }
 
 
