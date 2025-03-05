@@ -26,7 +26,7 @@ public class CustomerSpawner : MonoBehaviour
     
     void Start()
     {
-        InvokeRepeating(nameof(SpawnCustomer), 3f, 50f);
+        InvokeRepeating(nameof(SpawnCustomer), 3f, 10f);
     }
     
 
@@ -44,8 +44,7 @@ public class CustomerSpawner : MonoBehaviour
             if(!occupiedSeats.ContainsKey(spawn))
             {
                 //randomize customer selection
-                GameObject newCustomer = Instantiate(customers[Random.Range(0, customers.Length)]);
-                //NEED TO SPAWN CUSTOMER AT SET PLACES USE SPAWNLOC[]
+                GameObject newCustomer = Instantiate(customers[Random.Range(0, customers.Length)], spawnLoc[spawn - 1], Quaternion.identity );
 
                 //assign spawn point to customer
                 Customer customerScript = newCustomer.GetComponent<Customer>();
@@ -57,6 +56,7 @@ public class CustomerSpawner : MonoBehaviour
 
                 //add customer to occupied dictionary
                 occupiedSeats.Add(spawn, newCustomer);
+                break;
             }
         }
     }

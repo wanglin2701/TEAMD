@@ -10,33 +10,66 @@ public class Plate : MonoBehaviour
     private bool isDragging = false;
     private float x_margin = 0.105f; // Margin percentage to reduce the camera bounds
     private float y_margin = 0.19f; // Margin percentage to reduce the camera bounds
+    private bool isTriggering = false;
 
     private int maxPlateLoad = 3;
 
     [SerializeField] private GameObject[] PlateInventory;
 
+    private GameManager gameManager;
+
+
     void Start()
     {
         cam = Camera.main; // Get the main camera
         PlateInventory = new GameObject[maxPlateLoad]; //create the array with a max size
+        gameManager = FindObjectOfType<GameManager>();
 
     }
     private void OnTriggerEnter2D(Collider2D collision)
     {
+
         // Check if the collided object is the plate
-        if (collision.gameObject.CompareTag("Bin")  && collision.isTrigger)
+        if (collision.gameObject.CompareTag("Bin")  && isTriggering == false)
         {
+            isTriggering = true;
             Debug.Log("Clear Plate");
             ClearPlate();
         }
+
+        // Check if the plate collides with a customer
+        if (collision.gameObject.CompareTag("Customer") && isTriggering == false)
+        {
+            isTriggering = true;
+
+            Debug.Log("Plate touched the customer");
+            
+            // Serve the order to the customer
+            Customer customer = collision.gameObject.GetComponent<Customer>();
+            if (customer != null)
+            {
+                // Pass the plate ingredients to the customer to check if the order is correct
+                customer.ServeOrder(GetIngredients());
+                ClearPlate(); // Clear the ingredients from the plate
+            }
+        }
+    }
+
+    private void OnTriggerExit2D(Collider2D collision)
+    {
+        isTriggering = false;
     }
 
 
     #region Plate Controls
     void OnMouseDown()
     {
-        offset = transform.position - GetMouseWorldPosition();
-        isDragging = true;
+        if(gameManager.isGamePause == false)
+        {
+            offset = transform.position - GetMouseWorldPosition();
+            isDragging = true;
+        }
+     
     }
 
     void OnMouseDrag()
@@ -114,7 +147,21 @@ public class Plate : MonoBehaviour
 
             }
         }
-
-
     }
+
+    public GameObject[] GetIngredients()
+    {
+        List<GameObject> ingredients = new List<GameObject>();
+        for (int i = 0; i < PlateInventory.Length; i++)
+        {
+            if (PlateInventory[i] != null)
+            {
+                ingredients.Add(PlateInventory[i]);
+            }
+        }
+        return ingredients.ToArray();
+    }
+
+    
+
 }

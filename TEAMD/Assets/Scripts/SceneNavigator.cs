@@ -9,7 +9,6 @@ public class SceneNavigator : MonoBehaviour
     private GameObject HowtoPlay_screen;
     private GameObject Gameover_screen;
     private GameObject CompleteLevel_screen;
-    private GameObject PauseMenu_screen;
 
     // Start is called before the first frame update
     void Start()
@@ -27,9 +26,6 @@ public class SceneNavigator : MonoBehaviour
 
             CompleteLevel_screen = GameObject.Find("LevelCompleteScreen");
             CompleteLevel_screen.SetActive(false);
-
-            PauseMenu_screen = GameObject.Find("PauseMenu");
-            PauseMenu_screen.SetActive(false);
         }
     }
 
@@ -44,14 +40,11 @@ public class SceneNavigator : MonoBehaviour
         HowtoPlay_screen.SetActive(false);
 
     }
-    public void RestartGame()
+
+    public void PlayGame()
     {
-        Time.timeScale = 1f; // Resume time before reloading
-        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex); // Reload current scene
         
-        Gameover_screen.SetActive(false);
-        CompleteLevel_screen.SetActive(false);
-        PauseMenu_screen.SetActive(false);
+        SceneManager.LoadScene("GameUI");
     }
 
     public void QuitGame()
