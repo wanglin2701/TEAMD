@@ -16,10 +16,14 @@ public class Plate : MonoBehaviour
 
     [SerializeField] private GameObject[] PlateInventory;
 
+    private GameManager gameManager;
+
+
     void Start()
     {
         cam = Camera.main; // Get the main camera
         PlateInventory = new GameObject[maxPlateLoad]; //create the array with a max size
+        gameManager = FindObjectOfType<GameManager>();
 
     }
     private void OnTriggerEnter2D(Collider2D collision)
@@ -60,8 +64,12 @@ public class Plate : MonoBehaviour
     #region Plate Controls
     void OnMouseDown()
     {
-        offset = transform.position - GetMouseWorldPosition();
-        isDragging = true;
+        if(gameManager.isGamePause == false)
+        {
+            offset = transform.position - GetMouseWorldPosition();
+            isDragging = true;
+        }
+     
     }
 
     void OnMouseDrag()

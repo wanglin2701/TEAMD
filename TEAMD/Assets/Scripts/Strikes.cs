@@ -10,6 +10,7 @@ public class Strikes : MonoBehaviour
     private int currentStrikes = 0;
     private UIManager uiManager;
 
+
     void Start()
     {
         uiManager = FindObjectOfType<UIManager>();

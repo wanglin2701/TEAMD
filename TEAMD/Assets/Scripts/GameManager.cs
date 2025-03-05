@@ -15,11 +15,16 @@ public class GameManager : MonoBehaviour
     private Strikes strikesManager;
     private Score scoreManager;
 
+    public bool isGamePause = false;
+
     void Awake()
     {
-        if(instance == null)
+        Time.timeScale = 1f; // Start game
+
+        if (instance == null)
         {
             instance = this;
+
         }
         else
         {
@@ -29,6 +34,8 @@ public class GameManager : MonoBehaviour
 
     void Start()
     {
+
+        isGamePause = false;
         uiManager = FindObjectOfType<UIManager>();
         strikesManager = FindObjectOfType<Strikes>();
         scoreManager = FindObjectOfType<Score>();
@@ -61,6 +68,7 @@ public class GameManager : MonoBehaviour
     {
         isLevelOver = true;
         uiManager.ShowLevelComplete();
+        isGamePause = true;
         Time.timeScale = 0f; // Stop game
     }
 

@@ -33,10 +33,15 @@ public class IngrediantLogic : MonoBehaviour
 
     public string IngredientType;
 
-    
+    private GameManager gameManager;
+
+
+
     // Start is called before the first frame update
     void Start()
     {
+        gameManager = FindObjectOfType<GameManager>();
+
         rb = GetComponent<Rigidbody2D>();
         targetPlate = GameObject.Find("Plate");
 
@@ -70,7 +75,7 @@ public class IngrediantLogic : MonoBehaviour
     }
     private void OnMouseDown(){
 
-        if(AddedtoPlate == false)
+        if(AddedtoPlate == false && gameManager.isGamePause == false)
         {
             isDragging = true;
             rb.isKinematic = true; // Temporarily disable physics
@@ -89,7 +94,7 @@ public class IngrediantLogic : MonoBehaviour
     private void OnMouseUp(){
      
 
-        if (AddedtoPlate == false)
+        if (AddedtoPlate == false && gameManager.isGamePause == false)
         {
             isDragging = false;
             rb.isKinematic = false; // Re-enable physics
