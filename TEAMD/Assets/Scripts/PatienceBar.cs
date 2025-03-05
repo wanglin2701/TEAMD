@@ -34,10 +34,10 @@ public class PatienceBar : MonoBehaviour
             SetPatienceBarColor();    
         }
 
-        if (customerPatience <= 0 && !isStriked)
+        if (customerPatience <= 0)
         {
             isStriked = true;
-            gameManager.AddStrike(); // Add a strike when patience is 0
+            customer.CustomerLeavesAngrily();
             Destroy(gameObject); // Remove customer from scene
         }
 

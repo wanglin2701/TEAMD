@@ -101,7 +101,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   spawnPoint: 0
-  patienceMeterMax: 70
+  patienceMeterMax: 0
   scoreReward: 100
   behaviourType: 0
   orderArray: []

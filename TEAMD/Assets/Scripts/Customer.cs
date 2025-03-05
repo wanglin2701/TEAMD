@@ -203,11 +203,11 @@ public class Customer : MonoBehaviour
         CustomerSpawner.instance.DespawnCustomer(spawnPoint);
     }
 
-    protected virtual void CustomerLeavesAngrily()
+    public virtual void CustomerLeavesAngrily()
     {
         Destroy(gameObject); // Customer leaves
         CustomerSpawner.instance.DespawnCustomer(spawnPoint);
-        //gameManager.AddStrike();
+        gameManager.AddStrike();
 
     }
 }
