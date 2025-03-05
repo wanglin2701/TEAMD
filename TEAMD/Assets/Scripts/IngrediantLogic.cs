@@ -9,20 +9,14 @@ public class IngrediantLogic : MonoBehaviour
     private Vector2 endTouchPosition;
     private bool isDragging = false;
     [SerializeField] private float flickForceMultiplier;
-    [SerializeField] private float dragSpeed;
-    [SerializeField] private float maxDragDistance;
+    [SerializeField] private float maxDragRadius; // Adjust this for desired movement radius
 
     private bool AddedtoPlate;  
-    private float minVelocity = 4f;
+    private float minVelocity = 15f;
 
     [Header("Floating")]
-    public float floatStrength = 0.5f; // Controls how high the ingredient floats
-    public float floatSpeed = 1.0f;   // Controls the speed of the floating motion
-    public float floatDistance = 0.5f;  // Distance of the float
     public float moveSpeed = 2.0f;    // Speed of horizontal movement
     
-    private Vector3 startPosition;
-    private bool movingUp = true;     // Toggle for floating motion
     public GameObject targetPlate;
     public float offsetRange = 2f;
     public float directionVariation = 10f;
@@ -35,7 +29,7 @@ public class IngrediantLogic : MonoBehaviour
     private Vector3 lastMousePosition;
     private Vector3 velocity;
     private Vector3 startDragPosition; // Stores the starting position when clicked
-    [SerializeField] private float maxDragRadius = 2f; // Adjust this for desired movement radius
+
 
     public string IngredientType;
 
@@ -103,6 +97,17 @@ public class IngrediantLogic : MonoBehaviour
             rb.velocity = velocity * flickForceMultiplier;
         }
 
+        if (targetPlate != null)
+        {
+            Collider2D plateCollider = targetPlate.GetComponent<Collider2D>();
+
+            if (plateCollider.OverlapPoint(transform.position))
+            {
+                Debug.Log("Ingredient is over the plate!");
+                AddToPlate(targetPlate);
+                return; // Skip the velocity check
+            }
+        }
         // if(isDragging){
         //     endTouchPosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
 

@@ -95,7 +95,7 @@ Rigidbody2D:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 422428782735861687}
-  m_BodyType: 1
+  m_BodyType: 0
   m_Simulated: 1
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0
@@ -126,9 +126,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4e8bcf55c5e654940b7b0ff2305295e4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  flickForceMultiplier: 2
-  dragSpeed: 2
-  maxDragDistance: 2
+  flickForceMultiplier: 0.3
   floatStrength: 0.5
   floatSpeed: 1
   floatDistance: 0.5
@@ -136,7 +134,7 @@ MonoBehaviour:
   targetPlate: {fileID: 0}
   offsetRange: 2
   directionVariation: 10
-  maxDragRadius: 2
+  maxDragRadius: 4
   IngredientType: slime
 --- !u!61 &5107866973253314503
 BoxCollider2D:
