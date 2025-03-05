@@ -88,7 +88,7 @@ public class IngrediantLogic : MonoBehaviour
     private void OnMouseUp(){
      
 
-        if (AddedtoPlate == false && gameManager.isGamePause == false)
+        if (!AddedtoPlate && gameManager.isGamePause == false)
         {
             isDragging = false;
             rb.isKinematic = false; // Re-enable physics
@@ -112,18 +112,20 @@ public class IngrediantLogic : MonoBehaviour
     private void OnMouseDrag()
     {
         if (!isDragging || AddedtoPlate) return; // Prevent movement when added to plate
+        if(!AddedtoPlate){
+            Vector3 targetPosition = GetMouseWorldPos() + offset;
 
-        Vector3 targetPosition = GetMouseWorldPos() + offset;
+            // Apply movement limit based on radius
+            float distanceFromStart = Vector3.Distance(startDragPosition, targetPosition);
+            if (distanceFromStart > maxDragRadius)
+            {
+                // Clamp position within max radius
+                targetPosition = startDragPosition + (targetPosition - startDragPosition).normalized * maxDragRadius;
+            }
 
-        // Apply movement limit based on radius
-        float distanceFromStart = Vector3.Distance(startDragPosition, targetPosition);
-        if (distanceFromStart > maxDragRadius)
-        {
-            // Clamp position within max radius
-            targetPosition = startDragPosition + (targetPosition - startDragPosition).normalized * maxDragRadius;
+            rb.position = targetPosition; // Directly update position
         }
-
-        rb.position = targetPosition; // Directly update position
+        
     }
 
     Vector3 GetMouseWorldPos()
