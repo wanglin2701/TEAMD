@@ -43,8 +43,7 @@ public class SceneNavigator : MonoBehaviour
 
     public void PlayGame()
     {
-        Gameover_screen.SetActive(false);
-        CompleteLevel_screen.SetActive(false);
+        
         SceneManager.LoadScene("GameUI");
     }
 
