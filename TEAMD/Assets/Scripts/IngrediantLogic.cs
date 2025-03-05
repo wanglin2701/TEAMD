@@ -75,22 +75,16 @@ public class IngrediantLogic : MonoBehaviour
     }
     private void OnMouseDown(){
 
-        if(AddedtoPlate == false && gameManager.isGamePause == false)
+        if(!AddedtoPlate && gameManager.isGamePause == false)
         {
             isDragging = true;
-            rb.isKinematic = true; // Temporarily disable physics
-            startDragPosition = transform.position; // Save initial click position
+            rb.isKinematic = true;
+            startDragPosition = transform.position;
             lastMousePosition = GetMouseWorldPos();
             offset = transform.position - lastMousePosition;
         }
-
-        // if(AddedtoPlate == false)
-        // {
-        //     startTouchPosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-        //     isDragging = true;
-        // }
-        
     }
+
     private void OnMouseUp(){
      
 
@@ -113,53 +107,25 @@ public class IngrediantLogic : MonoBehaviour
                 return; // Skip the velocity check
             }
         }
-        // if(isDragging){
-        //     endTouchPosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-
-        //     Vector2 flickDirection = endTouchPosition - startTouchPosition;
-        //     rb.AddForce(flickDirection * flickForceMultiplier, ForceMode2D.Impulse);
-
-        //     isDragging = false;
-        // }
     }
+
     private void OnMouseDrag()
     {
-        if (!isDragging) return;
+        if (!isDragging || AddedtoPlate) return; // Prevent movement when added to plate
 
-       
+        Vector3 targetPosition = GetMouseWorldPos() + offset;
 
-        if (AddedtoPlate == false)
+        // Apply movement limit based on radius
+        float distanceFromStart = Vector3.Distance(startDragPosition, targetPosition);
+        if (distanceFromStart > maxDragRadius)
         {
-            Vector3 targetPosition = GetMouseWorldPos() + offset;
-
-            // 🔹 Apply movement limit based on radius
-            float distanceFromStart = Vector3.Distance(startDragPosition, targetPosition);
-            if (distanceFromStart > maxDragRadius)
-            {
-                // Clamp position within max radius
-                targetPosition = startDragPosition + (targetPosition - startDragPosition).normalized * maxDragRadius;
-            }
-
-            rb.position = targetPosition; // Directly update position
+            // Clamp position within max radius
+            targetPosition = startDragPosition + (targetPosition - startDragPosition).normalized * maxDragRadius;
         }
 
-
-        // if (isDragging)
-        // {
-        //     // Get the current mouse position
-        //     Vector2 currentMousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-
-        //     // Calculate the drag direction and clamp the distance
-        //     Vector2 dragDirection = currentMousePosition - startTouchPosition;
-        //     float dragDistance = Mathf.Min(dragDirection.magnitude, maxDragDistance); // Clamp to max distance
-
-        //     // Calculate the clamped position
-        //     Vector2 clampedPosition = startTouchPosition + dragDirection.normalized * dragDistance;
-
-        //     // Move the object smoothly toward the clamped position
-        //     rb.MovePosition(Vector2.Lerp(rb.position, clampedPosition, Time.deltaTime * dragSpeed));
-        // }
+        rb.position = targetPosition; // Directly update position
     }
+
     Vector3 GetMouseWorldPos()
     {
         Vector3 mousePoint = Input.mousePosition;
@@ -172,7 +138,6 @@ public class IngrediantLogic : MonoBehaviour
         // Check if the collided object is the plate
         if (collision.gameObject.CompareTag("Plate"))
         {
-            //Debug.Log(rb.velocity);
 
             // Check if the velocity is higher than the minimum
             if (rb.velocity.magnitude > minVelocity)
