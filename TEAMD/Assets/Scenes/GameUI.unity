@@ -1060,6 +1060,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   levelTime: 181
   timerText: {fileID: 945968270}
+  isGamePause: 0
 --- !u!4 &580063289
 Transform:
   m_ObjectHideFlags: 0
@@ -1793,8 +1794,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   customers:
   - {fileID: 2570981989943444794, guid: 004cc8a9d6ee4ba4fb2fbfd499c14a64, type: 3}
-  - {fileID: 2570981989943444794, guid: 004cc8a9d6ee4ba4fb2fbfd499c14a64, type: 3}
-  - {fileID: 2570981989943444794, guid: 004cc8a9d6ee4ba4fb2fbfd499c14a64, type: 3}
+  - {fileID: 2570981989943444794, guid: 646df4cf0e2a6f8449555b7780053f41, type: 3}
+  - {fileID: 2570981989943444794, guid: f1ded964d33f8d04fa761bf63e1a90d9, type: 3}
   spawnPoints: 010000000200000003000000
   spawnLoc:
   - {x: -6, y: 2, z: 0}
