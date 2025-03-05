@@ -140,9 +140,8 @@ public class Plate : MonoBehaviour
         {
             if (PlateInventory[i] != null)
             {
-                string name = "idx" + i.ToString();
-                
-                Destroy(transform.Find(name).gameObject.transform.GetChild(0).gameObject);
+                GameObject ingredient = PlateInventory[i];
+                Destroy(ingredient);
                 PlateInventory[i] = null;
 
             }
