@@ -37,6 +37,8 @@ public class IngrediantLogic : MonoBehaviour
     private Vector3 startDragPosition; // Stores the starting position when clicked
     [SerializeField] private float maxDragRadius = 2f; // Adjust this for desired movement radius
 
+    public string IngredientType;
+
     
     // Start is called before the first frame update
     void Start()
@@ -155,12 +157,12 @@ public class IngrediantLogic : MonoBehaviour
         return Camera.main.ScreenToWorldPoint(mousePoint);
     }
     //Adding Ingrediant onto plate
-    private void OnCollisionEnter2D(Collision2D collision)
+    private void OnTriggerEnter2D(Collider2D collision)
     {
         // Check if the collided object is the plate
         if (collision.gameObject.CompareTag("Plate"))
         {
-            Debug.Log(rb.velocity);
+            //Debug.Log(rb.velocity);
 
             // Check if the velocity is higher than the minimum
             if (rb.velocity.magnitude > minVelocity)
@@ -170,7 +172,7 @@ public class IngrediantLogic : MonoBehaviour
 
             else
             {
-                Debug.Log("Velocity too low to add to plate.");
+                //Debug.Log("Velocity too low to add to plate.");
             }
         }
     }

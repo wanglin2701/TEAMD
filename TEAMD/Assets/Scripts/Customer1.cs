@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class Customer1 : Customer
 {
+
     public void Awake()
     {
         patienceMeterMax = 15f;   
@@ -13,7 +14,8 @@ public class Customer1 : Customer
         patienceMeter -= Time.deltaTime * patienceDepletionRate; // Faster depletion
         if (patienceMeter <= 0)
         {
-            CustomerLeaves();
+            CustomerLeavesAngrily();
+
         }
     }
 }

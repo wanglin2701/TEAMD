@@ -137,6 +137,7 @@ MonoBehaviour:
   offsetRange: 2
   directionVariation: 10
   maxDragRadius: 2
+  IngredientType: coffee
 --- !u!61 &-2618156255832252347
 BoxCollider2D:
   m_ObjectHideFlags: 0

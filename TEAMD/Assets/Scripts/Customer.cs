@@ -145,31 +145,70 @@ public class Customer : MonoBehaviour
     protected virtual bool OrderMatches(GameObject[] playerOrder)
     {
 
-        //Check Values
-        foreach(GameObject ingredients in playerOrder) 
+        // Check if the lengths are equal first
+        if (playerOrder.Length != orderArray.Length)
+            return false; // If lengths don't match, orders can't be the same
+
+        //Retrieve the string from the Plate Inventory (Get all the ingredient type in the plate)
+        List<string> plateInventoryString = new List<string>();
+        foreach (GameObject playerOrderItem in playerOrder)
         {
-            Debug.Log("Player ingredient: " + ingredients);
+            plateInventoryString.Add(playerOrderItem.GetComponent<IngrediantLogic>().IngredientType);
         }
 
-        foreach (GameObject ingredients in orderArray)
+        List<string> customerOrderString = new List<string>();
+        foreach (GameObject customerItem in orderArray)
         {
-            Debug.Log("Order ingredient: " + ingredients);
+            customerOrderString.Add(customerItem.GetComponent<IngrediantLogic>().IngredientType);
         }
 
-        if (playerOrder.Length != orderArray.Length) return false;
+        //Check for values
+        //Debug.Log("Player order list: " + plateInventoryString[0]);
+        //Debug.Log("Order order list: " + customerOrderString[0]);
 
-        for (int i = 0; i < orderArray.Length; i++)
+        //if (plateInventoryString[0] == customerOrderString[0])
+        //{
+        //    Debug.Log("Ingredients are the same!");
+        //}
+
+        //else
+        //{
+        //    Debug.Log("Ingredients are wrong!");
+        //}
+
+        // Check if every ingredient in the playerOrder exists in orderList
+        foreach (var ingredient in plateInventoryString)
         {
-            if (playerOrder[i] != orderArray[i]) return false;
+            // If the ingredient exists in orderList, remove it (accounting for one occurrence)
+            if (customerOrderString.Contains(ingredient))
+            {
+                Debug.Log(ingredient + "is inside order");
+                customerOrderString.Remove(ingredient);
+            }
+            else
+            {
+                Debug.Log(ingredient + "does not contain");
+                // If any ingredient from playerOrder is not in orderList, return false
+                return false;
+            }
         }
 
-        return true;
+        // If orderList is empty, it means all ingredients have been matched correctly
+        return true; //return true if the orderList is empty
     }
 
     protected virtual void CustomerLeaves()
     {
         Destroy(gameObject); // Customer leaves
         CustomerSpawner.instance.DespawnCustomer(spawnPoint);
+    }
+
+    protected virtual void CustomerLeavesAngrily()
+    {
+        Destroy(gameObject); // Customer leaves
+        CustomerSpawner.instance.DespawnCustomer(spawnPoint);
+        //gameManager.AddStrike();
+
     }
 }
 #endregion
