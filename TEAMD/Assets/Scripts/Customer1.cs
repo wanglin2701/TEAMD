@@ -4,18 +4,12 @@ using UnityEngine;
 
 public class Customer1 : Customer
 {
-
-    public void Awake()
-    {
-        patienceMeterMax = 30f;   
-    }
     protected override void HandlePatience()
     {
-        patienceMeter -= Time.deltaTime * patienceDepletionRate; // Faster depletion
+        patienceMeter -= (patienceDepletionRate * 2f) * Time.deltaTime; // Faster depletion
         if (patienceMeter <= 0)
         {
-            CustomerLeavesAngrily();
-
+            CustomerLeaves();
         }
     }
 }

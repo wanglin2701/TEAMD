@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
@@ -6,6 +7,9 @@ using UnityEngine;
 public class OrderManager : MonoBehaviour
 {
     public static OrderManager instance;
+    [Header("Ingredients")]
+    List<GameObject> order = new List<GameObject>();
+    public GameObject[] ingredients; //assign in inspector
 
     [Header("Order Bubbles")]
     public GameObject orderBubble1; public GameObject orderBubble2; public GameObject orderBubble3; //assign in inspector
@@ -22,64 +26,40 @@ public class OrderManager : MonoBehaviour
         else { Destroy(gameObject); }
     }
 
-    void Start()
-    {
-        orderBubble1.SetActive(false);
-        orderBubble2.SetActive(false);
-        orderBubble3.SetActive(false);
-    }
-
     public List<GameObject> GenerateOrder(int spawnPoint)
     {
-        List<GameObject> order = new List<GameObject>();
-        List<string> validRecipes = new List<string>();
+        //clear order from before
+        order.Clear();
 
-        //sort through which difficulty recipes according to the time
-        foreach(Recipe recipe in DataManager.instance.recipeData.Values)
+        //max amount of ingredients in an order is 3
+        for(int i = 0; i < 3; i++)
         {
-            int ingredientCount = recipe.ParseIngredients().Count;
-
-            //game in 3-2 minute countdown, still easy mode
-            if(GameManager.instance.levelTime <= 181 && GameManager.instance.levelTime > 120)
+            //based on luck, add nothing
+            if(UnityEngine.Random.Range(0, 10) <= 4)
             {
-                if(ingredientCount == 1)
-                {
-                    validRecipes.Add(recipe.id);
-                }
+                order.Add(null);
             }
-            //game in 2-1 minute countdown, medium mode
-            else if (GameManager.instance.levelTime <= 120 && GameManager.instance.levelTime > 60)
+            else //add ingredient
             {
-                if(ingredientCount == 2)
-                {
-                    validRecipes.Add(recipe.id);
-                }
-            }
-            else //game less than 60 seconds left, hard mode
-            {
-                if(ingredientCount== 3)
-                {
-                    validRecipes.Add(recipe.id);
-                }
+                order.Add(ingredients[UnityEngine.Random.Range(0, ingredients.Length)]);
             }
         }
 
-        //select random recipe from dictionary
-        string randomRecipeKey = validRecipes[Random.Range(0, validRecipes.Count)];
-        Recipe selectedRecipe = DataManager.instance.recipeData[randomRecipeKey];
-
-        //retrieve ingredient IDs from recipe
-        List<string> ingredientIDs = selectedRecipe.ParseIngredients();
-
-        foreach(string id in ingredientIDs)
+        //check if everything is blank
+        bool blank = true;
+        foreach(GameObject ingredient in order)
         {
-            if(DataManager.instance.ingredientData.TryGetValue(id, out Ingredient ingredientInfo))
+            if(ingredient != null)
             {
-                if(DataManager.instance.ingredientPrefabs.TryGetValue(ingredientInfo.name, out GameObject ingredientPrefab))
-                {
-                    order.Add(ingredientPrefab);
-                }
+                blank = false;
+                break;
             }
+        }
+
+        //do not pass blank orders
+        if(blank)
+        {
+            GenerateOrder(spawnPoint);
         }
         return order;
     }
@@ -88,17 +68,13 @@ public class OrderManager : MonoBehaviour
     public void DisplayOrder(int spawn, List<GameObject> order)
     {
         int i = 0;
-
         switch(spawn)
         {
             case 1:
             orderBubble1.SetActive(true);
             foreach(GameObject ingredient in order)
             {
-                GameObject ingreDisplay = Instantiate(ingredient, ingBubblePoints1[i], Quaternion.identity);
-                RemoveIngredientStuff(ingreDisplay);
-                ingreDisplay.transform.localScale = new Vector3(0.5f, 0.5f, 0.5f);
-                orderIngredients1.Add(ingreDisplay);
+                orderIngredients1.Add(Instantiate(ingredient, ingBubblePoints1[i], Quaternion.identity));
                 i++;
             }
             break;
@@ -107,10 +83,7 @@ public class OrderManager : MonoBehaviour
             orderBubble2.SetActive(true);
             foreach(GameObject ingredient in order)
             {
-                GameObject ingreDisplay = Instantiate(ingredient, ingBubblePoints2[i], Quaternion.identity);
-                RemoveIngredientStuff(ingreDisplay);
-                ingreDisplay.transform.localScale = new Vector3(0.5f, 0.5f, 0.5f);
-                orderIngredients2.Add(ingreDisplay);
+                orderIngredients2.Add(Instantiate(ingredient, ingBubblePoints2[i], Quaternion.identity));
                 i++;
             }
             break;
@@ -119,24 +92,11 @@ public class OrderManager : MonoBehaviour
             orderBubble3.SetActive(true);
             foreach(GameObject ingredient in order)
             {
-                GameObject ingreDisplay = Instantiate(ingredient, ingBubblePoints3[i], Quaternion.identity);
-                RemoveIngredientStuff(ingreDisplay);
-                ingreDisplay.transform.localScale = new Vector3(0.5f, 0.5f, 0.5f);
-                orderIngredients3.Add(ingreDisplay);
+                orderIngredients3.Add(Instantiate(ingredient, ingBubblePoints3[i], Quaternion.identity));
                 i++;
             }
             break;
         }
-    }
-
-    void RemoveIngredientStuff(GameObject ingredient)
-    {
-        Rigidbody2D rb = ingredient.GetComponent<Rigidbody2D>();
-        Collider2D collider = ingredient.GetComponent<Collider2D>();
-        IngrediantLogic script = ingredient.GetComponent<IngrediantLogic>();
-        Destroy(rb);
-        Destroy(collider);
-        Destroy(script);
     }
 
     //called when customer despawns, deletes orders visually

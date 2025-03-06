@@ -76,7 +76,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 1
-  m_Sprite: {fileID: 21300000, guid: 7abf6e1d754a83d46933b47f56e78198, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 8253332bc82289947885d9a6b9f8cf11, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -126,7 +126,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4e8bcf55c5e654940b7b0ff2305295e4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  flickForceMultiplier: 0.3
+  flickForceMultiplier: 2
+  dragSpeed: 2
+  maxDragDistance: 2
+  minVelocity: 4
   floatStrength: 0.5
   floatSpeed: 1
   floatDistance: 0.5
@@ -134,8 +137,8 @@ MonoBehaviour:
   targetPlate: {fileID: 0}
   offsetRange: 2
   directionVariation: 10
-  maxDragRadius: 4
-  IngredientType: coffee
+  isMovingLeft: 0
+  isMovingRight: 1
 --- !u!61 &-2618156255832252347
 BoxCollider2D:
   m_ObjectHideFlags: 0

@@ -8,23 +8,37 @@ public class UIManager : MonoBehaviour
     
     public GameObject levelCompleteScreen;
     public GameObject levelFailScreen;
-    private GameManager gameManager;
+    public GameObject pauseScreen; 
 
-    public void Start()
+    void Start()
     {
-        gameManager = FindObjectOfType<GameManager>();
-
+        levelCompleteScreen.SetActive(false);
+        levelFailScreen.SetActive(false);
+        pauseScreen.SetActive(false); // Make sure the pause menu is hidden at start
     }
-
+    
     public void ShowLevelComplete()
     {
-        gameManager.isGamePause = true;
         levelCompleteScreen.SetActive(true);
+        Time.timeScale = 0f; // Pause game when level is complete
     }
 
     public void ShowLevelFail()
     {
-        gameManager.isGamePause = true;
         levelFailScreen.SetActive(true);
+        Time.timeScale = 0f; // Pause game when level is failed
+
+    }
+
+    public void ShowPauseScreen()
+    {
+        pauseScreen.SetActive(true);
+        Time.timeScale = 0f; // Pause game
+    }
+
+    public void HidePauseScreen()
+    {
+        pauseScreen.SetActive(false);
+        Time.timeScale = 1f; // Resume game
     }
 }

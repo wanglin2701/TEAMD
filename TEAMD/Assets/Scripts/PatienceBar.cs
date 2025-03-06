@@ -6,22 +6,19 @@ using UnityEngine.UI;
 public class PatienceBar : MonoBehaviour
 {
     //[SerializeField] GameObject customerPatienceBar; might need this container holder when applying it with customer objects who knows
-    [SerializeField] Transform barAnchor;
-    [SerializeField] SpriteRenderer barFill;
+    [SerializeField] Transform bar;
+    [SerializeField] Image barFill;
     [SerializeField] float customerPatience;
     private float customerMaxPatienceVar;
     private bool isStriked = false;
     private GameManager gameManager;
-    public Customer customer;
 
     
     // Start is called before the first frame update
     void Start()
     {
-        customer = GetComponentInParent<Customer>();
-        customerPatience = customer.patienceMeterMax;
+        customerMaxPatienceVar = customerPatience;
         gameManager = FindObjectOfType<GameManager>();
-    
     }
 
     // Update is called once per frame
@@ -30,14 +27,14 @@ public class PatienceBar : MonoBehaviour
         if (!isStriked)
         {
             customerPatience -= Time.deltaTime;
-            SetCustomerPatienceState(customerPatience, customer.patienceMeterMax);
+            SetCustomerPatienceState(customerPatience, customerMaxPatienceVar);
             SetPatienceBarColor();    
         }
 
-        if (customerPatience <= 0)
+        if (customerPatience <= 0 && !isStriked)
         {
             isStriked = true;
-            customer.CustomerLeavesAngrily();
+            gameManager.AddStrike(); // Add a strike when patience is 0
             Destroy(gameObject); // Remove customer from scene
         }
 
@@ -48,13 +45,13 @@ public class PatienceBar : MonoBehaviour
         if(state < 0){
             state = 0f;
         }
-        barAnchor.transform.localScale = new Vector3(barAnchor.localScale.x, state, 1f);
+        bar.transform.localScale = new Vector3(bar.localScale.x, state, 1f);
         
         
     }
     void SetPatienceBarColor(){
-        float yellowPatience = customer.patienceMeterMax * 0.6f;
-        float redPatience = customer.patienceMeterMax * 0.25f;
+        float yellowPatience = customerMaxPatienceVar * 0.6f;
+        float redPatience = customerMaxPatienceVar * 0.25f;
         //Debug.Log(customerPatience);
         if(customerPatience <= redPatience){
             barFill.color = Color.red;
