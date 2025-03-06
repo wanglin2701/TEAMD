@@ -75,7 +75,7 @@ public class IngrediantLogic : MonoBehaviour
     }
     private void OnMouseDown(){
 
-        if(!AddedtoPlate && gameManager.isGamePause == false)
+        if(!AddedtoPlate && gameManager.isPaused == false)
         {
             isDragging = true;
             rb.isKinematic = true;
@@ -88,7 +88,7 @@ public class IngrediantLogic : MonoBehaviour
     private void OnMouseUp(){
      
 
-        if (!AddedtoPlate && gameManager.isGamePause == false)
+        if (!AddedtoPlate && gameManager.isPaused == false)
         {
             isDragging = false;
             rb.isKinematic = false; // Re-enable physics

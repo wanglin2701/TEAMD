@@ -64,7 +64,7 @@ public class Plate : MonoBehaviour
     #region Plate Controls
     void OnMouseDown()
     {
-        if(gameManager.isGamePause == false)
+        if(gameManager.isPaused == false)
         {
             offset = transform.position - GetMouseWorldPosition();
             isDragging = true;
