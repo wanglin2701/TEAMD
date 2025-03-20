@@ -20,17 +20,6 @@ public class SceneNavigator : MonoBehaviour
             HowtoPlay_screen.SetActive(false);
         }
 
-        else if(SceneManager.GetActiveScene().name == "GameUI")
-        {
-            Gameover_screen = GameObject.Find("LevelFailScreen");
-            Gameover_screen.SetActive(false);
-
-            CompleteLevel_screen = GameObject.Find("LevelCompleteScreen");
-            CompleteLevel_screen.SetActive(false);
-
-            PauseMenu_screen = GameObject.Find("PauseMenuScreen");
-            PauseMenu_screen.SetActive(false);
-        }
     }
 
     public void OpenHowtoPlay()

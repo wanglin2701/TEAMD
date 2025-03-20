@@ -11,6 +11,7 @@ public class Plate : MonoBehaviour
     private float x_margin = 0.105f; // Margin percentage to reduce the camera bounds
     private float y_margin = 0.19f; // Margin percentage to reduce the camera bounds
     private bool isTriggering = false;
+    private Customer hoveredCustomer;
 
     private int maxPlateLoad = 3;
 
@@ -46,18 +47,20 @@ public class Plate : MonoBehaviour
             
             // Serve the order to the customer
             Customer customer = collision.gameObject.GetComponent<Customer>();
-            if (customer != null)
-            {
-                // Pass the plate ingredients to the customer to check if the order is correct
-                customer.ServeOrder(GetIngredients());
-                ClearPlate(); // Clear the ingredients from the plate
-            }
+            Debug.Log("Plate is hovering over a customer");
+            hoveredCustomer = collision.gameObject.GetComponent<Customer>();
         }
     }
 
     private void OnTriggerExit2D(Collider2D collision)
     {
         isTriggering = false;
+
+        if (collision.gameObject.CompareTag("Customer") && hoveredCustomer == collision.gameObject.GetComponent<Customer>())
+    {
+        hoveredCustomer = null;
+        Debug.Log("Plate moved away from customer, reference cleared.");
+    }
     }
 
 
@@ -100,6 +103,14 @@ public class Plate : MonoBehaviour
     void OnMouseUp()
     {
         isDragging = false;
+        if (hoveredCustomer != null)
+        {
+            Debug.Log("Serving order to customer");
+            hoveredCustomer.ServeOrder(GetIngredients());
+            ClearPlate();
+
+            transform.position = new Vector3(0f, -1.6f, 0f);
+        }
     }
 
     private Vector3 GetMouseWorldPosition()
