@@ -26,7 +26,7 @@ public class CustomerSpawner : MonoBehaviour
     
     void Start()
     {
-        InvokeRepeating(nameof(SpawnCustomer), 3f, 50f);
+        InvokeRepeating(nameof(SpawnCustomer), 3f, 10f);
     }
     
 
@@ -56,11 +56,20 @@ public class CustomerSpawner : MonoBehaviour
         {
             if (ingredient != null) 
             {
-                SpriteRenderer spriteRenderer = ingredient.GetComponent<SpriteRenderer>();
-                if (spriteRenderer != null)
-                {
-                    orderSprites.Add(spriteRenderer.sprite);
-                }
+                //randomize customer selection
+                GameObject newCustomer = Instantiate(customers[Random.Range(0, customers.Length)], spawnLoc[spawn - 1], Quaternion.identity );
+
+                //assign spawn point to customer
+                Customer customerScript = newCustomer.GetComponent<Customer>();
+                customerScript.spawnPoint = spawn;
+
+                //generate & display order
+                customerScript.orderArray = OrderManager.instance.GenerateOrder(spawn).ToArray<GameObject>();
+                OrderManager.instance.DisplayOrder(spawn, customerScript.orderArray.ToList<GameObject>());
+
+                //add customer to occupied dictionary
+                occupiedSeats.Add(spawn, newCustomer);
+                break;
             }
         }
 

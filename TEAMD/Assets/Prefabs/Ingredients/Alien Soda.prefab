@@ -76,7 +76,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 1
-  m_Sprite: {fileID: 21300000, guid: f43ee1629cfc71f4ab37dfe707c9ab8e, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 79b25dc175ee4054681fde5accad124f, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -126,10 +126,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4e8bcf55c5e654940b7b0ff2305295e4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  flickForceMultiplier: 2
-  dragSpeed: 2
-  maxDragDistance: 2
-  minVelocity: 4
+  flickForceMultiplier: 0.3
   floatStrength: 0.5
   floatSpeed: 1
   floatDistance: 0.5
@@ -137,8 +134,8 @@ MonoBehaviour:
   targetPlate: {fileID: 0}
   offsetRange: 2
   directionVariation: 10
-  isMovingLeft: 0
-  isMovingRight: 1
+  maxDragRadius: 4
+  IngredientType: soda
 --- !u!61 &-2880252641274245417
 BoxCollider2D:
   m_ObjectHideFlags: 0

@@ -6,9 +6,6 @@ using UnityEngine;
 public class OrderManager : MonoBehaviour
 {
     public static OrderManager instance;
-    [Header("Ingredients")]
-    List<GameObject> order = new List<GameObject>();
-    public GameObject[] ingredients; //assign in inspector
 
     [Header("Order Bubbles")]
     public GameObject orderBubble1; public GameObject orderBubble2; public GameObject orderBubble3; //assign in inspector
@@ -25,16 +22,65 @@ public class OrderManager : MonoBehaviour
         else { Destroy(gameObject); }
     }
 
+    void Start()
+    {
+        orderBubble1.SetActive(false);
+        orderBubble2.SetActive(false);
+        orderBubble3.SetActive(false);
+    }
+
     public List<GameObject> GenerateOrder(int spawnPoint)
     {
-        order.Clear();
+        List<GameObject> order = new List<GameObject>();
+        List<string> validRecipes = new List<string>();
 
-        while (order.Count < 3) 
+        //sort through which difficulty recipes according to the time
+        foreach(Recipe recipe in DataManager.instance.recipeData.Values)
         {
-            GameObject ingredient = ingredients[UnityEngine.Random.Range(0, ingredients.Length)]; // Explicitly using UnityEngine.Random
-            order.Add(ingredient);
+            int ingredientCount = recipe.ParseIngredients().Count;
+
+            //game in 3-2 minute countdown, still easy mode
+            if(GameManager.instance.levelTime <= 181 && GameManager.instance.levelTime > 120)
+            {
+                if(ingredientCount == 1)
+                {
+                    validRecipes.Add(recipe.id);
+                }
+            }
+            //game in 2-1 minute countdown, medium mode
+            else if (GameManager.instance.levelTime <= 120 && GameManager.instance.levelTime > 60)
+            {
+                if(ingredientCount == 2)
+                {
+                    validRecipes.Add(recipe.id);
+                }
+            }
+            else //game less than 60 seconds left, hard mode
+            {
+                if(ingredientCount== 3)
+                {
+                    validRecipes.Add(recipe.id);
+                }
+            }
         }
 
+        //select random recipe from dictionary
+        string randomRecipeKey = validRecipes[Random.Range(0, validRecipes.Count)];
+        Recipe selectedRecipe = DataManager.instance.recipeData[randomRecipeKey];
+
+        //retrieve ingredient IDs from recipe
+        List<string> ingredientIDs = selectedRecipe.ParseIngredients();
+
+        foreach(string id in ingredientIDs)
+        {
+            if(DataManager.instance.ingredientData.TryGetValue(id, out Ingredient ingredientInfo))
+            {
+                if(DataManager.instance.ingredientPrefabs.TryGetValue(ingredientInfo.name, out GameObject ingredientPrefab))
+                {
+                    order.Add(ingredientPrefab);
+                }
+            }
+        }
         return order;
     }
 
@@ -42,52 +88,55 @@ public class OrderManager : MonoBehaviour
     public void DisplayOrder(int spawn, List<Sprite> orderSprites)
     {
         int i = 0;
+
         switch(spawn)
         {
             case 1:
-                Debug.Log("Displaying order at Bubble 1");
-                orderBubble1.SetActive(true);
-                foreach(Sprite sprite in orderSprites)
-                {
-                    GameObject ingredientImage = new GameObject("IngredientSprite");
-                    SpriteRenderer renderer = ingredientImage.AddComponent<SpriteRenderer>();
-                    renderer.sprite = sprite;
-                    ingredientImage.transform.position = ingBubblePoints1[i];
-                    i++;
-                }
-                break;
+            orderBubble1.SetActive(true);
+            foreach(GameObject ingredient in order)
+            {
+                GameObject ingreDisplay = Instantiate(ingredient, ingBubblePoints1[i], Quaternion.identity);
+                RemoveIngredientStuff(ingreDisplay);
+                ingreDisplay.transform.localScale = new Vector3(0.5f, 0.5f, 0.5f);
+                orderIngredients1.Add(ingreDisplay);
+                i++;
+            }
+            break;
 
             case 2:
-                Debug.Log("Displaying order at Bubble 2");
-                orderBubble2.SetActive(true);
-                foreach(Sprite sprite in orderSprites)
-                {
-                    GameObject ingredientImage = new GameObject("IngredientSprite");
-                    SpriteRenderer renderer = ingredientImage.AddComponent<SpriteRenderer>();
-                    renderer.sprite = sprite;
-                    ingredientImage.transform.position = ingBubblePoints2[i];
-                    i++;
-                }
-                break;
+            orderBubble2.SetActive(true);
+            foreach(GameObject ingredient in order)
+            {
+                GameObject ingreDisplay = Instantiate(ingredient, ingBubblePoints2[i], Quaternion.identity);
+                RemoveIngredientStuff(ingreDisplay);
+                ingreDisplay.transform.localScale = new Vector3(0.5f, 0.5f, 0.5f);
+                orderIngredients2.Add(ingreDisplay);
+                i++;
+            }
+            break;
 
             case 3:
-                Debug.Log("Displaying order at Bubble 3"); // Debugging if it reaches this case
-                orderBubble3.SetActive(true);
-                foreach(Sprite sprite in orderSprites)
-                {
-                    Debug.Log($"Ingredient {i} in Order Bubble 3: {sprite.name}"); // Debugging sprites
-                    GameObject ingredientImage = new GameObject("IngredientSprite");
-                    SpriteRenderer renderer = ingredientImage.AddComponent<SpriteRenderer>();
-                    renderer.sprite = sprite;
-                    ingredientImage.transform.position = ingBubblePoints3[i];
-                    i++;
-                }
-                break;
-
-            default:
-                Debug.LogWarning($"Invalid spawn point {spawn} passed to DisplayOrder()");
-                break;
+            orderBubble3.SetActive(true);
+            foreach(GameObject ingredient in order)
+            {
+                GameObject ingreDisplay = Instantiate(ingredient, ingBubblePoints3[i], Quaternion.identity);
+                RemoveIngredientStuff(ingreDisplay);
+                ingreDisplay.transform.localScale = new Vector3(0.5f, 0.5f, 0.5f);
+                orderIngredients3.Add(ingreDisplay);
+                i++;
+            }
+            break;
         }
+    }
+
+    void RemoveIngredientStuff(GameObject ingredient)
+    {
+        Rigidbody2D rb = ingredient.GetComponent<Rigidbody2D>();
+        Collider2D collider = ingredient.GetComponent<Collider2D>();
+        IngrediantLogic script = ingredient.GetComponent<IngrediantLogic>();
+        Destroy(rb);
+        Destroy(collider);
+        Destroy(script);
     }
 
     //called when customer despawns, deletes orders visually

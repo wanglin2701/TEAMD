@@ -14,12 +14,16 @@ public class GameManager : MonoBehaviour
     private UIManager uiManager;
     private Strikes strikesManager;
     private Score scoreManager;
+    public bool isPaused = false;
 
     void Awake()
     {
-        if(instance == null)
+        Time.timeScale = 1f; // Start game
+
+        if (instance == null)
         {
             instance = this;
+
         }
         else
         {
@@ -33,6 +37,14 @@ public class GameManager : MonoBehaviour
         strikesManager = FindObjectOfType<Strikes>();
         scoreManager = FindObjectOfType<Score>();
         StartCoroutine(LevelCountdown());
+    }
+
+    void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.Escape)) // Press ESC to pause/unpause
+        {
+            TogglePause();
+        }
     }
 
     IEnumerator LevelCountdown()
@@ -63,6 +75,20 @@ public class GameManager : MonoBehaviour
         uiManager.ShowLevelComplete();
         Time.timeScale = 0f; // Stop game
     }
+
+    public void TogglePause()
+    {
+        if (isPaused)
+        {
+            uiManager.HidePauseScreen();
+        }
+        else
+        {
+            uiManager.ShowPauseScreen();
+        }
+        isPaused = !isPaused;
+    }
+
 
     public void AddStrike()
     {
