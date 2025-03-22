@@ -13,6 +13,8 @@ GameObject:
   - component: {fileID: 3589648199459921488}
   - component: {fileID: 8406124773557271754}
   - component: {fileID: -2618156255832252347}
+  - component: {fileID: -927367068061441365}
+  - component: {fileID: -8339411954596547414}
   m_Layer: 0
   m_Name: Alien Coffee
   m_TagString: Untagged
@@ -127,14 +129,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   flickForceMultiplier: 0.3
-  floatStrength: 0.5
-  floatSpeed: 1
-  floatDistance: 0.5
+  maxDragRadius: 4
   moveSpeed: 2
   targetPlate: {fileID: 0}
   offsetRange: 2
   directionVariation: 10
-  maxDragRadius: 4
   IngredientType: coffee
 --- !u!61 &-2618156255832252347
 BoxCollider2D:
@@ -181,3 +180,28 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 1.83, y: 1.62}
   m_EdgeRadius: 0
+--- !u!114 &-927367068061441365
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3238899674896573297}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c0c1a872a6684de48876a4d685a075c7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &-8339411954596547414
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3238899674896573297}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b958253ba2404ad44b3a04facc05a52c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  highlightColor: {r: 1, g: 0.92156863, b: 0.015686275, a: 1}
