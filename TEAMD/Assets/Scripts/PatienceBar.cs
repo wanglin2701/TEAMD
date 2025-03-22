@@ -13,11 +13,14 @@ public class PatienceBar : MonoBehaviour
     private bool isStriked = false;
     private GameManager gameManager;
     public Customer customer;
+    SoundManager soundManaager;
 
-    
+
+
     // Start is called before the first frame update
     void Start()
     {
+        soundManaager = GameObject.Find("SFXManager").GetComponent<SoundManager>();
         customer = GetComponentInParent<Customer>();
         customerPatience = customer.patienceMeterMax;
         gameManager = FindObjectOfType<GameManager>();
@@ -36,6 +39,7 @@ public class PatienceBar : MonoBehaviour
 
         if (customerPatience <= 0)
         {
+            soundManaager.PlaySound("CustomerLeft");
             isStriked = true;
             customer.CustomerLeavesAngrily();
             Destroy(gameObject); // Remove customer from scene

@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 4073004186946039992}
   - component: {fileID: 1233011999793338097}
   - component: {fileID: 201285135740581394}
+  - component: {fileID: 4901224346062435048}
   m_Layer: 5
   m_Name: RestartButton
   m_TagString: Untagged
@@ -37,7 +38,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 0.0024414062, y: -114}
-  m_SizeDelta: {x: 379.79883, y: 128.64148}
+  m_SizeDelta: {x: 318.2011, y: 95.7894}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &4073004186946039992
 CanvasRenderer:
@@ -133,6 +134,18 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+--- !u!114 &4901224346062435048
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 228306155560877335}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c617255bc98ec3348bb3332291457508, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &3463033882371505533
 GameObject:
   m_ObjectHideFlags: 0
@@ -413,6 +426,7 @@ GameObject:
   - component: {fileID: 2107951543257585499}
   - component: {fileID: 3626049960646249520}
   - component: {fileID: 6372505875076252685}
+  - component: {fileID: 359147879896669261}
   m_Layer: 5
   m_Name: ResumeButton
   m_TagString: Untagged
@@ -438,7 +452,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 0.0024414062, y: 33}
-  m_SizeDelta: {x: 379.79883, y: 128.64148}
+  m_SizeDelta: {x: 277.136, y: 91.6829}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &2107951543257585499
 CanvasRenderer:
@@ -534,6 +548,18 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+--- !u!114 &359147879896669261
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4075682764300104411}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c617255bc98ec3348bb3332291457508, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &4479264205706680295
 GameObject:
   m_ObjectHideFlags: 0
@@ -546,6 +572,7 @@ GameObject:
   - component: {fileID: 1696654948324523094}
   - component: {fileID: 436167200983129970}
   - component: {fileID: 8057511166274092567}
+  - component: {fileID: 79082150214306683}
   m_Layer: 5
   m_Name: TitleScreenButton
   m_TagString: Untagged
@@ -571,7 +598,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 0.0024414062, y: -401}
-  m_SizeDelta: {x: 379.79883, y: 128.64148}
+  m_SizeDelta: {x: 696.0005, y: 112.2153}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &1696654948324523094
 CanvasRenderer:
@@ -667,6 +694,18 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+--- !u!114 &79082150214306683
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4479264205706680295}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c617255bc98ec3348bb3332291457508, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &4847265999076948601
 GameObject:
   m_ObjectHideFlags: 0
@@ -947,6 +986,7 @@ GameObject:
   - component: {fileID: 1323382605556407436}
   - component: {fileID: 7621515233052250294}
   - component: {fileID: 3037235298710863389}
+  - component: {fileID: 1382873833297279778}
   m_Layer: 5
   m_Name: QuitButton
   m_TagString: Untagged
@@ -972,7 +1012,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 0.0024414062, y: -256}
-  m_SizeDelta: {x: 379.79883, y: 128.64148}
+  m_SizeDelta: {x: 207.3254, y: 104.0023}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &1323382605556407436
 CanvasRenderer:
@@ -1068,6 +1108,18 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+--- !u!114 &1382873833297279778
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7554823187937635452}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c617255bc98ec3348bb3332291457508, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &8222957705084563777
 GameObject:
   m_ObjectHideFlags: 0

@@ -9,10 +9,12 @@ public class Strikes : MonoBehaviour
     public GameObject[] strikeIcons; // Strike UI Icons
     private int currentStrikes = 0;
     private UIManager uiManager;
+    SoundManager soundManaager;
 
 
     void Start()
     {
+        soundManaager = GameObject.Find("SFXManager").GetComponent<SoundManager>();
         uiManager = FindObjectOfType<UIManager>();
     }
 
@@ -20,6 +22,7 @@ public class Strikes : MonoBehaviour
     {
         if (currentStrikes < strikeIcons.Length)
         {
+            soundManaager.PlaySound("Wrong");
             strikeIcons[currentStrikes].SetActive(true);
             currentStrikes++;
 
@@ -32,6 +35,7 @@ public class Strikes : MonoBehaviour
 
     void GameOver()
     {
+        soundManaager.PlaySound("Gameover");
         uiManager.ShowLevelFail();
         Time.timeScale = 0f; // Stop game
     }

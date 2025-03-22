@@ -18,10 +18,12 @@ public class Plate : MonoBehaviour
     [SerializeField] private GameObject[] PlateInventory;
 
     private GameManager gameManager;
+    SoundManager soundManaager;
 
 
     void Start()
     {
+        soundManaager = GameObject.Find("SFXManager").GetComponent<SoundManager>();
         cam = Camera.main; // Get the main camera
         PlateInventory = new GameObject[maxPlateLoad]; //create the array with a max size
         gameManager = FindObjectOfType<GameManager>();
@@ -69,6 +71,7 @@ public class Plate : MonoBehaviour
     {
         if(gameManager.isPaused == false)
         {
+            soundManaager.PlaySound("PickUpPlate");
             offset = transform.position - GetMouseWorldPosition();
             isDragging = true;
         }
@@ -135,6 +138,7 @@ public class Plate : MonoBehaviour
 
     public void AddIngredienttoPlate(GameObject ingredient, int position)
     {
+        soundManaager.PlaySound("IngredientEnter");
         Transform slot = transform.GetChild(position); // Get child at the given index
         ingredient.transform.SetParent(slot); // Set ingredient as a child of the slot
         ingredient.transform.localPosition = Vector3.zero; // Reset position inside the slot
@@ -146,6 +150,7 @@ public class Plate : MonoBehaviour
     }
     public void ClearPlate()
     {
+        soundManaager.PlaySound("ClearPlate");
 
         for (int i = 0; i < PlateInventory.Length; i++)
         {

@@ -974,8 +974,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 217, y: -300}
-  m_SizeDelta: {x: 916.48, y: 31.8938}
+  m_AnchoredPosition: {x: 13.6263, y: -300}
+  m_SizeDelta: {x: 509.7327, y: 31.8938}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &193683954205509735
 CanvasRenderer:
@@ -1005,7 +1005,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Mouse (Click & Drag Plate to Customers)
+  m_text: Mouse (Click, Drag & Release  Plate to Customers)
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 193015a8b0fde1946978d759656c87dc, type: 2}
   m_sharedMaterial: {fileID: 334405904884709233, guid: 193015a8b0fde1946978d759656c87dc, type: 2}
@@ -1044,7 +1044,7 @@ MonoBehaviour:
   m_textAlignment: 65535
   m_characterSpacing: 0
   m_wordSpacing: 0
-  m_lineSpacing: 0
+  m_lineSpacing: 74.6
   m_lineSpacingMax: 0
   m_paragraphSpacing: 0
   m_charWidthMaxAdj: 0
@@ -1439,6 +1439,7 @@ GameObject:
   - component: {fileID: 2438387753071178117}
   - component: {fileID: 1752989247144715372}
   - component: {fileID: 3262317669993921750}
+  - component: {fileID: 2574342937133486164}
   m_Layer: 5
   m_Name: Button
   m_TagString: Untagged
@@ -1464,7 +1465,7 @@ RectTransform:
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
   m_AnchoredPosition: {x: 139, y: 971.37}
-  m_SizeDelta: {x: 379.7988, y: 128.6415}
+  m_SizeDelta: {x: 215.5383, y: 128.63}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &2438387753071178117
 CanvasRenderer:
@@ -1560,3 +1561,15 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+--- !u!114 &2574342937133486164
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9106121858092748825}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c617255bc98ec3348bb3332291457508, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
