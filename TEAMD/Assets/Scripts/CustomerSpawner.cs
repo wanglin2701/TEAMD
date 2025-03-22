@@ -5,13 +5,16 @@ using Unity.VisualScripting;
 using UnityEngine;
 
 public class CustomerSpawner : MonoBehaviour
-{   
+{
+    SoundManager soundManaager;
     public static CustomerSpawner instance;
     public GameObject[] customers; //assign in inspector
     public int[] spawnPoints = new int[] {1, 2, 3};
     public Vector3[] spawnLoc; //assign in inspector
     Dictionary<int, GameObject> occupiedSeats = new Dictionary<int, GameObject>(); //CANNOT EXCEED 3
-    
+
+    private int customerNumber;
+
     void Awake()
     {
         if(instance == null)
@@ -26,6 +29,7 @@ public class CustomerSpawner : MonoBehaviour
     
     void Start()
     {
+        soundManaager = GameObject.Find("SFXManager").GetComponent<SoundManager>();
         InvokeRepeating(nameof(SpawnCustomer), 3f, 10f);
     }
     
@@ -43,8 +47,19 @@ public class CustomerSpawner : MonoBehaviour
         {
             if(!occupiedSeats.ContainsKey(spawn))
             {
+                
+                customerNumber = Random.Range(0, customers.Length);
+
                 //randomize customer selection
-                GameObject newCustomer = Instantiate(customers[Random.Range(0, customers.Length)], spawnLoc[spawn - 1], Quaternion.identity );
+                GameObject newCustomer = Instantiate(customers[customerNumber], spawnLoc[spawn - 1], Quaternion.identity );
+
+                //Play Alien Sound
+                soundManaager.PlaySound("CustomerSpawn");
+
+                StartCoroutine(DelaySpawnSound(1f));  //Alien moving up
+
+             
+
 
                 //assign spawn point to customer
                 Customer customerScript = newCustomer.GetComponent<Customer>();
@@ -75,5 +90,26 @@ public class CustomerSpawner : MonoBehaviour
             Destroy(customer);
             OrderManager.instance.DestroyOrder(spawn);
         }
+    }
+    IEnumerator DelaySpawnSound(float seconds)
+    {
+
+        yield return new WaitForSeconds(seconds); // Wait for the given time
+        switch (customerNumber)
+        {
+            case 0:
+                soundManaager.PlaySound("RedAlien");
+                break;
+
+            case 1:
+                soundManaager.PlaySound("BlueAlien");
+                break;
+
+            case 2:
+                soundManaager.PlaySound("SmallAlien");
+                break;
+
+        }
+
     }
 }

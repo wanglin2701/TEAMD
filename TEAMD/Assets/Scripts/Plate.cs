@@ -35,6 +35,7 @@ public class Plate : MonoBehaviour
         // Check if the collided object is the plate
         if (collision.gameObject.CompareTag("Bin")  && isTriggering == false)
         {
+            soundManaager.PlaySound("ClearPlate");
             isTriggering = true;
             Debug.Log("Clear Plate");
             ClearPlate();
@@ -150,7 +151,6 @@ public class Plate : MonoBehaviour
     }
     public void ClearPlate()
     {
-        soundManaager.PlaySound("ClearPlate");
 
         for (int i = 0; i < PlateInventory.Length; i++)
         {

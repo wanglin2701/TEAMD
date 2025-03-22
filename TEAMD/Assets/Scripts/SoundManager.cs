@@ -104,32 +104,32 @@ public class SoundManager : MonoBehaviour
                 soundManagerSource.PlayOneShot(LoadingSound);
                 break;
 
-            case "Wrong":
+            case "Wrong":  //Not Added
                 soundManagerSource.volume = 0.30f;
 
                 soundManagerSource.PlayOneShot(WrongOrder);
                 break;
 
-            case "CustomerLeft":
+            case "CustomerLeft": //Not Added
                 soundManagerSource.volume = 0.30f;
 
                 soundManagerSource.PlayOneShot(CustomerLeft);
                 break;
 
-            case "SmallAlien":   //Not Added
+            case "SmallAlien": 
                 soundManagerSource.volume = 0.30f;
 
                 soundManagerSource.PlayOneShot(SmallAlien);
                 break;
 
-            case "RedAlien":   //Not Added
+            case "RedAlien":  
                 soundManagerSource.volume = 0.30f;
 
                 soundManagerSource.PlayOneShot(RedAlien);
                 break;
 
-            case "BlueAlien":   //Not Added
-                soundManagerSource.volume = 0.30f;
+            case "BlueAlien":   
+                soundManagerSource.volume = 0.25f;
 
                 soundManagerSource.PlayOneShot(BlueAlien);
                 break;
@@ -141,7 +141,7 @@ public class SoundManager : MonoBehaviour
                 break;
 
             case "Gameover":
-                soundManagerSource.volume = 1f;
+                soundManagerSource.volume = 1.5f;
 
                 soundManagerSource.PlayOneShot(GameoverSound);
                 break;
@@ -152,7 +152,7 @@ public class SoundManager : MonoBehaviour
                 soundManagerSource.PlayOneShot(PlateFull);
                 break;
 
-            case "NotEnoughSpeed":  
+            case "NotEnoughSpeed":   //Not Added
                 soundManagerSource.volume = 1f;
 
                 soundManagerSource.PlayOneShot(NotEnoughSpeed);

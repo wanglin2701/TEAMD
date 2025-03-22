@@ -22,7 +22,7 @@ public class Strikes : MonoBehaviour
     {
         if (currentStrikes < strikeIcons.Length)
         {
-            soundManaager.PlaySound("Wrong");
+            //soundManaager.PlaySound("Wrong");
             strikeIcons[currentStrikes].SetActive(true);
             currentStrikes++;
 
