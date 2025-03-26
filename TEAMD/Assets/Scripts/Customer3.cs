@@ -5,10 +5,20 @@ using UnityEngine;
 //vip customer
 public class Customer3 : Customer
 {
-   protected override void Start()
+   public void Awake()
     {
-        base.Start();
-        scoreReward *= 2; // VIP customers give more score
+        patienceMeterMax = 30f;   
+        scoreReward = 200; // VIP customers give more score
+    }
+
+    protected override void HandlePatience()
+    {
+        patienceMeter -= Time.deltaTime * patienceDepletionRate; // Faster depletion
+        if (patienceMeter <= 0)
+        {
+            CustomerLeavesAngrily();
+
+        }
     }
 
     

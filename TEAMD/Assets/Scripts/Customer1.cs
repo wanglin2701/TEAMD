@@ -8,7 +8,8 @@ public class Customer1 : Customer
 
     public void Awake()
     {
-        patienceMeterMax = 30f;   
+        patienceMeterMax = 30f;
+        scoreReward = 100;   
     }
     protected override void HandlePatience()
     {

@@ -36,6 +36,7 @@ public class CustomerSpawner : MonoBehaviour
 
     public void SpawnCustomer()
     {
+        Debug.Log(customers.Length);
         //if enough customers at table, do not spawn
         if(occupiedSeats.Count >= 3)
         {
@@ -48,8 +49,8 @@ public class CustomerSpawner : MonoBehaviour
             if(!occupiedSeats.ContainsKey(spawn))
             {
                 
-                customerNumber = Random.Range(0, customers.Length);
-
+                customerNumber = Random.Range(0, customers.Length - 1);
+                Debug.Log(customerNumber);
                 //randomize customer selection
                 GameObject newCustomer = Instantiate(customers[customerNumber], spawnLoc[spawn - 1], Quaternion.identity );
 
@@ -57,9 +58,6 @@ public class CustomerSpawner : MonoBehaviour
                 soundManaager.PlaySound("CustomerSpawn");
 
                 StartCoroutine(DelaySpawnSound(1f));  //Alien moving up
-
-             
-
 
                 //assign spawn point to customer
                 Customer customerScript = newCustomer.GetComponent<Customer>();

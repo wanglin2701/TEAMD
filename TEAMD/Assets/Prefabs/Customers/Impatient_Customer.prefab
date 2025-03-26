@@ -103,7 +103,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   spawnPoint: 0
   patienceMeterMax: 0
-  scoreReward: 100
+  scoreReward: 0
   behaviourType: 0
   orderArray: []
   bar: {fileID: 7244271067944531327}

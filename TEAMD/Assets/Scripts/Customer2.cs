@@ -6,26 +6,31 @@ using UnityEngine;
 public class Customer2 : Customer
 {
     private float orderChangeTime;
-    private bool hasChangedOrder = false;
+    private bool hasChangedOrder;
 
-    protected override void Start()
+    public void Awake()
     {
-        base.Start();
+        hasChangedOrder = false;
+        patienceMeterMax = 30f;
+        scoreReward = 150;
         orderChangeTime = patienceMeterMax / 2f; // Change order midway
     }
 
-    protected override void Update()
+    protected override void HandlePatience()
     {
-        base.Update();
-
-         // If patience reaches half and the order hasn't changed yet, change it
+        patienceMeter -= Time.deltaTime * patienceDepletionRate; // Faster depletion
         if (!hasChangedOrder && patienceMeter <= orderChangeTime)
-        {
+        { 
+            
             ChangeOrder();
             hasChangedOrder = true;
         }
-    }
+        if (patienceMeter <= 0)
+        {
+            CustomerLeavesAngrily();
 
+        }
+    }
     private void ChangeOrder()
     {
        // Destroy current order visually
