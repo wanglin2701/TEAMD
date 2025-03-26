@@ -96,7 +96,7 @@ public class IngrediantLogic : MonoBehaviour
             rb.velocity = velocity * flickForceMultiplier;
         }
 
-        if (targetPlate != null)
+        if (targetPlate != null && !AddedtoPlate)
         {
             Collider2D plateCollider = targetPlate.GetComponent<Collider2D>();
 
