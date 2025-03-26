@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 5628207642994778345}
   - component: {fileID: 8258551001939185104}
   m_Layer: 0
-  m_Name: Customer_1
+  m_Name: Impatient_Customer
   m_TagString: Customer
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
