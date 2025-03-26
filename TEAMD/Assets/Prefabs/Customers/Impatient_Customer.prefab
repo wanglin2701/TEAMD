@@ -13,9 +13,9 @@ GameObject:
   - component: {fileID: 5280539760463151215}
   - component: {fileID: 5628207642994778345}
   - component: {fileID: 8258551001939185104}
-  - component: {fileID: 4388128623556153497}
+  - component: {fileID: 1728093853167355888}
   m_Layer: 0
-  m_Name: Customer_2
+  m_Name: Impatient_Customer
   m_TagString: Customer
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -78,7 +78,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: -1
-  m_Sprite: {fileID: 1416861930, guid: 5995d513b0844c14999b9264eb5a2271, type: 3}
+  m_Sprite: {fileID: -712932046, guid: 5995d513b0844c14999b9264eb5a2271, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -103,8 +103,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   spawnPoint: 0
   patienceMeterMax: 0
-  scoreReward: 200
-  behaviourType: 2
+  scoreReward: 100
+  behaviourType: 0
   orderArray: []
   bar: {fileID: 7244271067944531327}
   barFill: {fileID: 0}
@@ -145,7 +145,7 @@ BoxCollider2D:
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 4.5142856, y: 4.571429}
+    oldSize: {x: 4.4857144, y: 4.3142858}
     newSize: {x: 5, y: 5}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
@@ -181,7 +181,7 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 0
---- !u!114 &4388128623556153497
+--- !u!114 &1728093853167355888
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}

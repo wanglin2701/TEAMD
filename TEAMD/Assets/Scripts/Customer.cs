@@ -7,7 +7,7 @@ using UnityEngine.UI;
 public class Customer : MonoBehaviour
 {
     public int spawnPoint;
-    public enum BehaviourType { Impatient, OrderChanger, VIP }
+    public enum BehaviourType { Normal, Impatient, OrderChanger, VIP }
 
     [Header("Customer Settings")]
     public float patienceMeterMax; // Max patience

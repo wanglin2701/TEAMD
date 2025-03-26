@@ -10,12 +10,11 @@ GameObject:
   m_Component:
   - component: {fileID: 414261863573391351}
   - component: {fileID: 5615928031679077102}
-  - component: {fileID: 5280539760463151215}
   - component: {fileID: 5628207642994778345}
   - component: {fileID: 8258551001939185104}
-  - component: {fileID: 7650300078541275243}
+  - component: {fileID: 8692436202143829112}
   m_Layer: 0
-  m_Name: Customer_3
+  m_Name: Order_Changer
   m_TagString: Customer
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -78,7 +77,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: -1
-  m_Sprite: {fileID: -2084821521, guid: 5995d513b0844c14999b9264eb5a2271, type: 3}
+  m_Sprite: {fileID: 1416861930, guid: 5995d513b0844c14999b9264eb5a2271, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -89,26 +88,6 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!114 &5280539760463151215
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2570981989943444794}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 43d7aade7144e64458a6d8e25afe9b28, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  spawnPoint: 0
-  patienceMeterMax: 0
-  scoreReward: 150
-  behaviourType: 0
-  orderArray: []
-  bar: {fileID: 7244271067944531327}
-  barFill: {fileID: 0}
-  customerPatience: 0
 --- !u!61 &5628207642994778345
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -145,7 +124,7 @@ BoxCollider2D:
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 2.4857142, y: 3.8857143}
+    oldSize: {x: 4.5142856, y: 4.571429}
     newSize: {x: 5, y: 5}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
@@ -181,7 +160,7 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 0
---- !u!114 &7650300078541275243
+--- !u!114 &8692436202143829112
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -190,10 +169,17 @@ MonoBehaviour:
   m_GameObject: {fileID: 2570981989943444794}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 714e187477754244491dc8bd3ec0abc6, type: 3}
+  m_Script: {fileID: 11500000, guid: 24cc530cd5138d54983f397a658ac0aa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  highlightColor: {r: 0, g: 1, b: 1, a: 1}
+  spawnPoint: 0
+  patienceMeterMax: 0
+  scoreReward: 0
+  behaviourType: 1
+  orderArray: []
+  bar: {fileID: 0}
+  barFill: {fileID: 0}
+  customerPatience: 0
 --- !u!1 &6708935850303242046
 GameObject:
   m_ObjectHideFlags: 0
