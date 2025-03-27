@@ -2533,7 +2533,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Clear Plate
+  m_text: Ingredients
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 193015a8b0fde1946978d759656c87dc, type: 2}
   m_sharedMaterial: {fileID: 334405904884709233, guid: 193015a8b0fde1946978d759656c87dc, type: 2}
@@ -3016,7 +3016,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -465.72, y: -149}
+  m_AnchoredPosition: {x: -464.1, y: -149}
   m_SizeDelta: {x: 448.9606, y: 31.894}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &4882558857024860860
@@ -3039,7 +3039,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Mouse (Click & Drag to Trash Bin)
+  m_text: Pixelized by Serene & Peck Hsia
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 193015a8b0fde1946978d759656c87dc, type: 2}
   m_sharedMaterial: {fileID: 334405904884709233, guid: 193015a8b0fde1946978d759656c87dc, type: 2}
