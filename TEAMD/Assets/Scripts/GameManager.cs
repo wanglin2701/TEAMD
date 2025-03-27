@@ -16,6 +16,8 @@ public class GameManager : MonoBehaviour
     private Score scoreManager;
     public bool isPaused = false;
 
+
+
     void Awake()
     {
         Time.timeScale = 1f; // Start game

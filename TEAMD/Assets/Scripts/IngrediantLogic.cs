@@ -35,11 +35,15 @@ public class IngrediantLogic : MonoBehaviour
 
     private GameManager gameManager;
 
+    SoundManager soundManaager;
+
+
 
 
     // Start is called before the first frame update
     void Start()
     {
+        soundManaager = GameObject.Find("SFXManager").GetComponent<SoundManager>();
         gameManager = FindObjectOfType<GameManager>();
 
         rb = GetComponent<Rigidbody2D>();
@@ -77,6 +81,9 @@ public class IngrediantLogic : MonoBehaviour
 
         if(!AddedtoPlate && gameManager.isPaused == false)
         {
+            soundManaager.PlaySound("HoldIngredient");
+
+
             isDragging = true;
             rb.isKinematic = true;
             startDragPosition = transform.position;
@@ -178,6 +185,7 @@ public class IngrediantLogic : MonoBehaviour
 
         else
         {
+            soundManaager.PlaySound("PlateFull");
             Debug.Log("Plate Full!!");
         }
 

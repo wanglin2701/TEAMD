@@ -11,8 +11,12 @@ public class UIManager : MonoBehaviour
     private GameManager gameManager;
     public GameObject pauseScreen;
 
+    SoundManager soundManaager;
+
+
     public void Start()
     {
+        soundManaager = GameObject.Find("SFXManager").GetComponent<SoundManager>();
         gameManager = FindObjectOfType<GameManager>();
         levelCompleteScreen.SetActive(false);
         levelFailScreen.SetActive(false);
@@ -24,6 +28,8 @@ public class UIManager : MonoBehaviour
     {
         gameManager.isPaused = true;
         levelCompleteScreen.SetActive(true);
+        soundManaager.PlaySound("LevelWin");
+
     }
 
     public void ShowLevelFail()

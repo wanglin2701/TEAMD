@@ -27,8 +27,7 @@ public class SoundManager : MonoBehaviour
     public AudioClip PickUpPlate;
     public AudioClip PlateFull;
     public AudioClip NotEnoughSpeed;  //When Ingredient not enuff velocity
-
-
+    public AudioClip LevelWin;
 
     public AudioClip BGMusic;
     public AudioClip GameplayMusic;
@@ -86,7 +85,7 @@ public class SoundManager : MonoBehaviour
                 soundManagerSource.PlayOneShot(CustomerSpawn);
                 break;
 
-            case "HoldIngredient":  //Not Added
+            case "HoldIngredient":  
                 soundManagerSource.volume = 0.30f;
 
                 soundManagerSource.PlayOneShot(HoldingOnIngredient);
@@ -104,13 +103,13 @@ public class SoundManager : MonoBehaviour
                 soundManagerSource.PlayOneShot(LoadingSound);
                 break;
 
-            case "Wrong":  //Not Added
+            case "Wrong":  
                 soundManagerSource.volume = 0.30f;
 
                 soundManagerSource.PlayOneShot(WrongOrder);
                 break;
 
-            case "CustomerLeft": //Not Added
+            case "CustomerLeft": 
                 soundManagerSource.volume = 0.30f;
 
                 soundManagerSource.PlayOneShot(CustomerLeft);
@@ -146,16 +145,16 @@ public class SoundManager : MonoBehaviour
                 soundManagerSource.PlayOneShot(GameoverSound);
                 break;
 
-            case "PlateFull":  //Not Added
+            case "PlateFull":  
                 soundManagerSource.volume = 1f;
 
                 soundManagerSource.PlayOneShot(PlateFull);
                 break;
 
-            case "NotEnoughSpeed":   //Not Added
+            case "LevelWin":   
                 soundManagerSource.volume = 1f;
 
-                soundManagerSource.PlayOneShot(NotEnoughSpeed);
+                soundManagerSource.PlayOneShot(LevelWin);
                 break;
         }
     }

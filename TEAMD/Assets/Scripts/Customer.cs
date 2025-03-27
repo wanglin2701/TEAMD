@@ -32,8 +32,12 @@ public class Customer : MonoBehaviour
     private bool isStriked = false;
     private GameManager gameManager;
 
+    SoundManager soundManaager;
+
+
     protected virtual void Start()
     {
+        soundManaager = GameObject.Find("SFXManager").GetComponent<SoundManager>();
         patienceMeter = patienceMeterMax;
         customerMaxPatienceVar = customerPatience;
         gameManager = FindObjectOfType<GameManager>();
@@ -136,6 +140,7 @@ public class Customer : MonoBehaviour
 
         else 
         {
+            soundManaager.PlaySound("Gameover");
             Debug.Log("hello");
             gameManager.AddStrike();
             CustomerLeaves(); 
@@ -205,6 +210,7 @@ public class Customer : MonoBehaviour
 
     public virtual void CustomerLeavesAngrily()
     {
+        soundManaager.PlaySound("CustomerLeft");
         Destroy(gameObject); // Customer leaves
         CustomerSpawner.instance.DespawnCustomer(spawnPoint);
         gameManager.AddStrike();
