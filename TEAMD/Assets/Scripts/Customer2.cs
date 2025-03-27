@@ -8,8 +8,10 @@ public class Customer2 : Customer
     private float orderChangeTime;
     private bool hasChangedOrder;
 
+
     public void Awake()
     {
+        
         hasChangedOrder = false;
         patienceMeterMax = 30f;
         scoreReward = 150;
@@ -33,7 +35,8 @@ public class Customer2 : Customer
     }
     private void ChangeOrder()
     {
-       // Destroy current order visually
+
+        // Destroy current order visually
         OrderManager.instance.DestroyOrder(spawnPoint);
 
         // Generate a new order
@@ -42,6 +45,8 @@ public class Customer2 : Customer
 
         // Display the new order visually
         OrderManager.instance.DisplayOrder(spawnPoint, newOrder);
+        GameObject.Find("SFXManager").GetComponent<SoundManager>().PlaySound("ChangeOrder");
+
 
         Debug.Log("Customer changed order!");
     }

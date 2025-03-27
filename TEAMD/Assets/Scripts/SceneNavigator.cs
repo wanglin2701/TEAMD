@@ -10,6 +10,7 @@ public class SceneNavigator : MonoBehaviour
     private GameObject Gameover_screen;
     private GameObject CompleteLevel_screen;
     private GameObject PauseMenu_screen;
+    private GameObject Credit_screen;
 
     SoundManager soundManaager;
 
@@ -21,8 +22,11 @@ public class SceneNavigator : MonoBehaviour
 
         if (SceneManager.GetActiveScene().name == "TitleScreen")
         {
+            Credit_screen = GameObject.Find("Credits");
             HowtoPlay_screen = GameObject.Find("HowtoPlay");
             HowtoPlay_screen.SetActive(false);
+            Credit_screen.SetActive(false);
+
         }
 
     }
@@ -40,6 +44,22 @@ public class SceneNavigator : MonoBehaviour
         soundManaager.PlaySound("BTNClick");
 
         HowtoPlay_screen.SetActive(false);
+
+    }
+
+    public void OpenCredits()
+    {
+        soundManaager.PlaySound("BTNClick");
+
+        Credit_screen.SetActive(true);
+
+    }
+
+    public void CloseCredits()
+    {
+        soundManaager.PlaySound("BTNClick");
+
+        Credit_screen.SetActive(false);
 
     }
 

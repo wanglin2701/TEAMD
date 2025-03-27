@@ -29,6 +29,7 @@ public class SoundManager : MonoBehaviour
     public AudioClip NotEnoughSpeed;  //When Ingredient not enuff velocity
     public AudioClip LevelWin;
     public AudioClip BigBlueAlien;
+    public AudioClip ChangeOrder;
 
 
     public AudioClip BGMusic;
@@ -163,6 +164,12 @@ public class SoundManager : MonoBehaviour
                 soundManagerSource.volume = 0.90f;
 
                 soundManagerSource.PlayOneShot(BigBlueAlien);
+                break;
+
+            case "ChangeOrder":
+                soundManagerSource.volume = 0.90f;
+
+                soundManagerSource.PlayOneShot(ChangeOrder);
                 break;
         }
     }

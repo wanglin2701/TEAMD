@@ -323,5 +323,6 @@ MonoBehaviour:
   NotEnoughSpeed: {fileID: 0}
   LevelWin: {fileID: 8300000, guid: 0daa1f0bfeffeff449992f00c421ab1a, type: 3}
   BigBlueAlien: {fileID: 8300000, guid: 57cbf9f21949d444eb7ed86d673961a9, type: 3}
+  ChangeOrder: {fileID: 8300000, guid: 13a15e7535b230244bfc268a98348338, type: 3}
   BGMusic: {fileID: 8300000, guid: fd40dbf218a9aa6499dfd2665c141f2a, type: 3}
   GameplayMusic: {fileID: 8300000, guid: 02b8b22b799a8f347b3b92a48c9a2989, type: 3}
