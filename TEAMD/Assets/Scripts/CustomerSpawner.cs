@@ -49,7 +49,7 @@ public class CustomerSpawner : MonoBehaviour
             if(!occupiedSeats.ContainsKey(spawn))
             {
                 
-                customerNumber = Random.Range(0, customers.Length - 1);
+                customerNumber = Random.Range(0, customers.Length);
                 Debug.Log(customerNumber);
                 //randomize customer selection
                 GameObject newCustomer = Instantiate(customers[customerNumber], spawnLoc[spawn - 1], Quaternion.identity );

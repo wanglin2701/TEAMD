@@ -2,14 +2,12 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-//impatient
-public class Customer1 : Customer
+public class Customer4 : Customer
 {
-
     public void Awake()
     {
-        patienceMeterMax = 20f;
-        scoreReward = 100;   
+        patienceMeterMax = 30f;
+        scoreReward = 50;   
     }
     protected override void HandlePatience()
     {

@@ -7,7 +7,7 @@ public class Customer3 : Customer
 {
    public void Awake()
     {
-        patienceMeterMax = 30f;   
+        patienceMeterMax = 15f;   
         scoreReward = 200; // VIP customers give more score
     }
 

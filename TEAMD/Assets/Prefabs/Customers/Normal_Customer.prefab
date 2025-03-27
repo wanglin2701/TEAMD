@@ -12,7 +12,8 @@ GameObject:
   - component: {fileID: 5615928031679077102}
   - component: {fileID: 5628207642994778345}
   - component: {fileID: 8258551001939185104}
-  - component: {fileID: -3635685363428653786}
+  - component: {fileID: 4988441262478773605}
+  - component: {fileID: 8159089465198243133}
   m_Layer: 0
   m_Name: Normal_Customer
   m_TagString: Customer
@@ -160,7 +161,7 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 0
---- !u!114 &-3635685363428653786
+--- !u!114 &4988441262478773605
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -169,7 +170,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 2570981989943444794}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: dafe3e7a352dee84ba32073911fb8be1, type: 3}
+  m_Script: {fileID: 11500000, guid: 1800ff7b72bbe6d43ae37ac9e107732b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   spawnPoint: 0
@@ -180,6 +181,19 @@ MonoBehaviour:
   bar: {fileID: 0}
   barFill: {fileID: 0}
   customerPatience: 0
+--- !u!114 &8159089465198243133
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2570981989943444794}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 714e187477754244491dc8bd3ec0abc6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  highlightColor: {r: 0, g: 1, b: 1, a: 1}
 --- !u!1 &6708935850303242046
 GameObject:
   m_ObjectHideFlags: 0

@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 5628207642994778345}
   - component: {fileID: 8258551001939185104}
   - component: {fileID: 6576215586803978367}
+  - component: {fileID: 4831476479013590636}
   m_Layer: 0
   m_Name: VIP_Customer
   m_TagString: Customer
@@ -180,6 +181,19 @@ MonoBehaviour:
   bar: {fileID: 0}
   barFill: {fileID: 0}
   customerPatience: 0
+--- !u!114 &4831476479013590636
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2570981989943444794}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 714e187477754244491dc8bd3ec0abc6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  highlightColor: {r: 0, g: 1, b: 1, a: 1}
 --- !u!1 &6708935850303242046
 GameObject:
   m_ObjectHideFlags: 0
