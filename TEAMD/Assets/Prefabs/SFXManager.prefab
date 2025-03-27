@@ -320,5 +320,8 @@ MonoBehaviour:
   BlueAlien: {fileID: 8300000, guid: ea347c31425d3164b86395ed02121408, type: 3}
   PickUpPlate: {fileID: 8300000, guid: b94ffe5166ec13a4b9ba2637ea6bcdb6, type: 3}
   PlateFull: {fileID: 8300000, guid: 1b82e190af0658c40b9b01b9cb55edaa, type: 3}
+  NotEnoughSpeed: {fileID: 0}
+  LevelWin: {fileID: 8300000, guid: 0daa1f0bfeffeff449992f00c421ab1a, type: 3}
+  BigBlueAlien: {fileID: 8300000, guid: 57cbf9f21949d444eb7ed86d673961a9, type: 3}
   BGMusic: {fileID: 8300000, guid: fd40dbf218a9aa6499dfd2665c141f2a, type: 3}
   GameplayMusic: {fileID: 8300000, guid: 02b8b22b799a8f347b3b92a48c9a2989, type: 3}

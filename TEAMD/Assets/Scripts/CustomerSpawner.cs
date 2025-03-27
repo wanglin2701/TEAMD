@@ -107,6 +107,13 @@ public class CustomerSpawner : MonoBehaviour
                 soundManaager.PlaySound("SmallAlien");
                 break;
 
+            case 3:
+                soundManaager.PlaySound("BigBlueAlien");
+                break;
+
+
+
+
         }
 
     }

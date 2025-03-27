@@ -28,6 +28,8 @@ public class SoundManager : MonoBehaviour
     public AudioClip PlateFull;
     public AudioClip NotEnoughSpeed;  //When Ingredient not enuff velocity
     public AudioClip LevelWin;
+    public AudioClip BigBlueAlien;
+
 
     public AudioClip BGMusic;
     public AudioClip GameplayMusic;
@@ -155,6 +157,12 @@ public class SoundManager : MonoBehaviour
                 soundManagerSource.volume = 1f;
 
                 soundManagerSource.PlayOneShot(LevelWin);
+                break;
+
+            case "BigBlueAlien":
+                soundManagerSource.volume = 0.90f;
+
+                soundManagerSource.PlayOneShot(BigBlueAlien);
                 break;
         }
     }
