@@ -11,6 +11,9 @@ public class CustomerSpawner : MonoBehaviour
     public GameObject[] customers; //assign in inspector
     public int[] spawnPoints = new int[] {1, 2, 3};
     public Vector3[] spawnLoc; //assign in inspector
+    public float slideDuration; //assign in inspector
+    public float spawnDelay; //assign in inspector
+    bool customerSpawned = false;
     Dictionary<int, GameObject> occupiedSeats = new Dictionary<int, GameObject>(); //CANNOT EXCEED 3
 
     private int customerNumber;
@@ -51,27 +54,52 @@ public class CustomerSpawner : MonoBehaviour
                 
                 customerNumber = Random.Range(0, customers.Length);
                 Debug.Log(customerNumber);
-                //randomize customer selection
-                GameObject newCustomer = Instantiate(customers[customerNumber], spawnLoc[spawn - 1], Quaternion.identity );
+
+                //find positions and randomize customer selection
+                Vector3 loweredPosition = new Vector3(spawnLoc[spawn - 1].x, spawnLoc[spawn -1].y - spawnDelay, 0);
+                Vector3 hightenedPosition = spawnLoc[spawn - 1];
+                GameObject newCustomer = Instantiate(customers[customerNumber], loweredPosition, Quaternion.identity);
+
+                //slide customer up
+                newCustomer.GetComponent<Collider2D>().enabled = false;
+                StartCoroutine(SlideCustomer(newCustomer.transform, loweredPosition, hightenedPosition, spawn));
 
                 //Play Alien Sound
                 soundManaager.PlaySound("CustomerSpawn");
 
                 StartCoroutine(DelaySpawnSound(1f));  //Alien moving up
 
-                //assign spawn point to customer
-                Customer customerScript = newCustomer.GetComponent<Customer>();
-                customerScript.spawnPoint = spawn;
-
-                //generate & display order
-                customerScript.orderArray = OrderManager.instance.GenerateOrder(spawn).ToArray<GameObject>();
-                OrderManager.instance.DisplayOrder(spawn, customerScript.orderArray.ToList<GameObject>());
-
                 //add customer to occupied dictionary
                 occupiedSeats.Add(spawn, newCustomer);
                 break;
             }
         }
+    }
+
+    IEnumerator SlideCustomer(Transform customerTransform, Vector3 loweredPos, Vector3 hightenedPos, int spawn)
+    {
+        float elapsedTime = 0f;
+        
+        //animation for sliding
+        while(elapsedTime < slideDuration)
+        {
+            customerTransform.position = Vector3.Lerp(loweredPos, hightenedPos, elapsedTime/slideDuration);
+            elapsedTime += Time.deltaTime;
+
+            yield return null;
+        }
+        customerTransform.position = hightenedPos;
+
+        //allowed to serve customer now
+        customerTransform.GetComponent<Collider2D>().enabled = true;
+        
+        //assign spawn point to customer
+        Customer customerScript = customerTransform.GetComponent<Customer>();
+        customerScript.spawnPoint = spawn;
+
+        //generate & display order
+        customerScript.orderArray = OrderManager.instance.GenerateOrder(spawn).ToArray<GameObject>();
+        OrderManager.instance.DisplayOrder(spawn, customerScript.orderArray.ToList<GameObject>());
     }
 
     //call this when patience runs out or order is fulfilled
@@ -110,11 +138,6 @@ public class CustomerSpawner : MonoBehaviour
             case 3:
                 soundManaager.PlaySound("BigBlueAlien");
                 break;
-
-
-
-
         }
-
     }
 }
