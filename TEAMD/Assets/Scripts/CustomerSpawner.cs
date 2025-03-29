@@ -13,7 +13,6 @@ public class CustomerSpawner : MonoBehaviour
     public Vector3[] spawnLoc; //assign in inspector
     public float slideDuration; //assign in inspector
     public float spawnDelay; //assign in inspector
-    bool customerSpawned = false;
     Dictionary<int, GameObject> occupiedSeats = new Dictionary<int, GameObject>(); //CANNOT EXCEED 3
 
     private int customerNumber;
