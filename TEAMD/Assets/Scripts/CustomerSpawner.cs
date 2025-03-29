@@ -12,6 +12,7 @@ public class CustomerSpawner : MonoBehaviour
     public int[] spawnPoints = new int[] {1, 2, 3};
     public Vector3[] spawnLoc; //assign in inspector
     public float slideDuration; //assign in inspector
+    public float spawnrate = 6f;
     public float spawnDelay; //assign in inspector
     Dictionary<int, GameObject> occupiedSeats = new Dictionary<int, GameObject>(); //CANNOT EXCEED 3
 
@@ -32,7 +33,37 @@ public class CustomerSpawner : MonoBehaviour
     void Start()
     {
         soundManaager = GameObject.Find("SFXManager").GetComponent<SoundManager>();
-        InvokeRepeating(nameof(SpawnCustomer), 3f, 10f);
+        StartCoroutine(SpawnCustomerRoutine());
+    }
+
+    void Update()
+    {
+        //adjust spawnrate based on time in level in GameManager.cs
+        if(GameManager.instance.levelTime <= 150 && GameManager.instance.levelTime > 120)
+        {
+            spawnrate = 4f;
+        }
+        else if(GameManager.instance.levelTime <= 120 && GameManager.instance.levelTime > 90)
+        {
+            spawnrate = 2f;
+        }
+        else if(GameManager.instance.levelTime <= 90 && GameManager.instance.levelTime > 60)
+        {
+            spawnrate = 1f;
+        }
+        else if(GameManager.instance.levelTime < 60)
+        {
+            spawnrate = 0.5f;
+        }
+    }
+
+    IEnumerator SpawnCustomerRoutine()
+    {
+        while(true)
+        {
+            SpawnCustomer();
+            yield return new WaitForSeconds(spawnrate);
+        }
     }
     
 

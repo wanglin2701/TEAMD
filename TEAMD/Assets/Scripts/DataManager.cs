@@ -103,5 +103,17 @@ public class DataManager : MonoBehaviour
             recipeData[recipe.id] = recipe;
         }
     }
+
+    public string GetIngredientIDByName(string ingredientName)
+    {
+        foreach(var entry in ingredientData)
+        {
+            if(entry.Value.name == ingredientName)
+            {
+                return entry.Key;
+            }
+        }
+        return null;
+    }
 }
 
