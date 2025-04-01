@@ -3039,7 +3039,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Pixelized by Serene & Peck Hsia
+  m_text: Pixelized by Peck Hsia
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 193015a8b0fde1946978d759656c87dc, type: 2}
   m_sharedMaterial: {fileID: 334405904884709233, guid: 193015a8b0fde1946978d759656c87dc, type: 2}
