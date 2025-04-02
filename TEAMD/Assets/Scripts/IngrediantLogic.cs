@@ -127,6 +127,7 @@ public class IngrediantLogic : MonoBehaviour
             {
                 Debug.Log("Ingredient is over the plate!");
                 AddToPlate(targetPlate);
+                lineRenderer.enabled = false;
                 return; // Skip the velocity check
             }
         }
