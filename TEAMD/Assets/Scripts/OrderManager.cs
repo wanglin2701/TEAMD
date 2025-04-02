@@ -10,7 +10,15 @@ public class OrderManager : MonoBehaviour
     [Header("Order Bubbles")]
     public GameObject orderBubble1; public GameObject orderBubble2; public GameObject orderBubble3; //assign in inspector
     public Vector3[] ingBubblePoints1; public Vector3[] ingBubblePoints2; public Vector3[] ingBubblePoints3;// assign in inspector
-    List<GameObject> orderIngredients1 = new List<GameObject>(); List<GameObject> orderIngredients2 = new List<GameObject>(); List<GameObject> orderIngredients3 = new List<GameObject>();
+
+    [Header("Order Trackers")]
+    List<GameObject> orderIngredients1 = new List<GameObject>();
+    List<GameObject> orderIngredients2 = new List<GameObject>();
+    List<GameObject> orderIngredients3 = new List<GameObject>();
+    List<string> order1IDs = new List<string>();
+    List<string> order2IDs = new List<string>();
+    List<string> order3IDs = new List<string>();
+    List<string> ingredientsOrdered = new List<string>();
 
 
     void Awake()
@@ -83,6 +91,28 @@ public class OrderManager : MonoBehaviour
         }
         return order;
     }
+    
+    //for use in ingredient algorithm in ingredientSpawner.cs
+    public List<string> ObserveOrders()
+    {
+        ingredientsOrdered.Clear();
+
+        foreach(string id in order1IDs)
+        {
+            ingredientsOrdered.Add(id);
+        }
+
+        foreach(string id in order2IDs)
+        {
+            ingredientsOrdered.Add(id);
+        }
+
+        foreach(string id in order3IDs)
+        {
+            ingredientsOrdered.Add(id);
+        }
+        return ingredientsOrdered;
+    }
 
     //called when customer is spawned, creates orders visually
     public void DisplayOrder(int spawn, List<GameObject> order)
@@ -93,36 +123,54 @@ public class OrderManager : MonoBehaviour
         {
             case 1:
             orderBubble1.SetActive(true);
+            order1IDs.Clear();
             foreach(GameObject ingredient in order)
             {
                 GameObject ingreDisplay = Instantiate(ingredient, ingBubblePoints1[i], Quaternion.identity);
                 RemoveIngredientStuff(ingreDisplay);
                 ingreDisplay.transform.localScale = new Vector3(0.5f, 0.5f, 0.5f);
                 orderIngredients1.Add(ingreDisplay);
+
+                string ingredientName = ingredient.name.Replace("(Clone)", "");
+                string id = DataManager.instance.GetIngredientIDByName(ingredientName);
+                order1IDs.Add(id);
+
                 i++;
             }
             break;
 
             case 2:
             orderBubble2.SetActive(true);
+            order2IDs.Clear();
             foreach(GameObject ingredient in order)
             {
                 GameObject ingreDisplay = Instantiate(ingredient, ingBubblePoints2[i], Quaternion.identity);
                 RemoveIngredientStuff(ingreDisplay);
                 ingreDisplay.transform.localScale = new Vector3(0.5f, 0.5f, 0.5f);
                 orderIngredients2.Add(ingreDisplay);
+
+                string ingredientName = ingredient.name.Replace("(Clone)", "");
+                string id = DataManager.instance.GetIngredientIDByName(ingredientName);
+                order2IDs.Add(id);
+
                 i++;
             }
             break;
 
             case 3:
             orderBubble3.SetActive(true);
+            order3IDs.Clear();
             foreach(GameObject ingredient in order)
             {
                 GameObject ingreDisplay = Instantiate(ingredient, ingBubblePoints3[i], Quaternion.identity);
                 RemoveIngredientStuff(ingreDisplay);
                 ingreDisplay.transform.localScale = new Vector3(0.5f, 0.5f, 0.5f);
                 orderIngredients3.Add(ingreDisplay);
+
+                string ingredientName = ingredient.name.Replace("(Clone)", "");
+                string id = DataManager.instance.GetIngredientIDByName(ingredientName);
+                order3IDs.Add(id);
+
                 i++;
             }
             break;

@@ -674,6 +674,7 @@ MonoBehaviour:
   - {fileID: 422428782735861687, guid: f7eff84832f4d3645b240977d3343f0e, type: 3}
   - {fileID: 4803899175861149436, guid: 2f758be2f169d064da5746842e029d69, type: 3}
   - {fileID: 5275746774799953152, guid: b5339746325c86049a4fe60380a057ab, type: 3}
+  - {fileID: 5275746774799953152, guid: 0d167dd98ab392047858cec03debe321, type: 3}
 --- !u!4 &374105191
 Transform:
   m_ObjectHideFlags: 0
@@ -1035,6 +1036,9 @@ MonoBehaviour:
   - {x: 10, y: -5, z: 0}
   - {x: -10, y: -5, z: 0}
   spawnrate: 1
+  easyPercentage: 0.75
+  normalPercentage: 0.5
+  hardPercentage: 0.25
 --- !u!4 &566654993
 Transform:
   m_ObjectHideFlags: 0
@@ -1828,6 +1832,9 @@ MonoBehaviour:
   - {x: -6, y: 1, z: 0}
   - {x: 0, y: 1, z: 0}
   - {x: 6, y: 1, z: 0}
+  slideDuration: 1
+  spawnrate: 8
+  spawnDelay: 3
 --- !u!4 &1158154739
 Transform:
   m_ObjectHideFlags: 0
