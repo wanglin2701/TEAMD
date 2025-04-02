@@ -37,7 +37,8 @@ public class IngrediantLogic : MonoBehaviour
 
     SoundManager soundManaager;
 
-
+    private LineRenderer lineRenderer; // LineRenderer for the drag radius circle
+    private int circleSegments = 50;
 
 
     // Start is called before the first frame update
@@ -48,6 +49,17 @@ public class IngrediantLogic : MonoBehaviour
 
         rb = GetComponent<Rigidbody2D>();
         targetPlate = GameObject.Find("Plate");
+
+        lineRenderer = gameObject.AddComponent<LineRenderer>();
+        lineRenderer.positionCount = circleSegments + 1;
+        lineRenderer.loop = true;
+        lineRenderer.startWidth = 0.1f;
+        lineRenderer.endWidth = 0.1f;
+        lineRenderer.useWorldSpace = true;
+        lineRenderer.material = new Material(Shader.Find("Sprites/Default"));
+        lineRenderer.startColor = Color.blue;
+        lineRenderer.endColor = Color.blue;
+        lineRenderer.enabled = false; // Hide it initially
 
         if (targetPlate != null)
         {
@@ -75,6 +87,7 @@ public class IngrediantLogic : MonoBehaviour
         if (isDragging)
         {
             lastMousePosition = GetMouseWorldPos();
+            UpdateCircle();
         }
     }
     private void OnMouseDown(){
@@ -89,6 +102,9 @@ public class IngrediantLogic : MonoBehaviour
             startDragPosition = transform.position;
             lastMousePosition = GetMouseWorldPos();
             offset = transform.position - lastMousePosition;
+
+            lineRenderer.enabled = true; // Show the drag radius
+            UpdateCircle();
         }
     }
 
@@ -114,6 +130,7 @@ public class IngrediantLogic : MonoBehaviour
                 return; // Skip the velocity check
             }
         }
+        lineRenderer.enabled = false;
     }
 
     private void OnMouseDrag()
@@ -190,6 +207,18 @@ public class IngrediantLogic : MonoBehaviour
         }
 
         
+    }
+    private void UpdateCircle()
+    {
+        Vector3[] points = new Vector3[circleSegments + 1];
+        for (int i = 0; i <= circleSegments; i++)
+        {
+            float angle = i * 2 * Mathf.PI / circleSegments;
+            float x = startDragPosition.x + Mathf.Cos(angle) * maxDragRadius;
+            float y = startDragPosition.y + Mathf.Sin(angle) * maxDragRadius;
+            points[i] = new Vector3(x, y, 0);
+        }
+        lineRenderer.SetPositions(points);
     }
     void AddForceUp()
         {

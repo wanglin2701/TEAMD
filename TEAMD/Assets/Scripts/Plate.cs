@@ -113,7 +113,7 @@ public class Plate : MonoBehaviour
             hoveredCustomer.ServeOrder(GetIngredients());
             ClearPlate();
 
-            transform.position = new Vector3(0f, -1.6f, 0f);
+            transform.position = new Vector3(0.05f, -2.25f, 0f);
         }
     }
 
