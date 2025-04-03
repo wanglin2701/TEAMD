@@ -42,11 +42,13 @@ public class UIManager : MonoBehaviour
     {
         pauseScreen.SetActive(true);
         Time.timeScale = 0f; // Pause game
+        gameManager.isPaused = true;
     }
 
     public void HidePauseScreen()
     {
         pauseScreen.SetActive(false);
         Time.timeScale = 1f; // Resume game
+        gameManager.isPaused = false;
     }
 }

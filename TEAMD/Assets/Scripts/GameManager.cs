@@ -88,7 +88,7 @@ public class GameManager : MonoBehaviour
         {
             uiManager.ShowPauseScreen();
         }
-        isPaused = !isPaused;
+
     }
 
 
