@@ -6,6 +6,8 @@ TagManager:
   tags:
   - Plate
   - Bin
+  - Customer
+  - UI
   layers:
   - Default
   - TransparentFX

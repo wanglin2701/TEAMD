@@ -10,7 +10,7 @@ public class Strikes : MonoBehaviour
     private int currentStrikes = 0;
     private UIManager uiManager;
     SoundManager soundManaager;
-
+    public GameObject redOverlay;
 
     void Start()
     {
@@ -26,10 +26,26 @@ public class Strikes : MonoBehaviour
             strikeIcons[currentStrikes].SetActive(true);
             currentStrikes++;
 
+            if (redOverlay != null)
+            {
+                StartCoroutine(FlashRed(currentStrikes >= strikeIcons.Length));
+            }
+
             if (currentStrikes >= strikeIcons.Length)
             {
                 GameOver();
             }
+        }
+    }
+
+    IEnumerator FlashRed(bool keepOnScreen = false)
+    {
+        redOverlay.SetActive(true);
+
+        if (!keepOnScreen)
+        {
+            yield return new WaitForSeconds(0.3f);
+            redOverlay.SetActive(false);
         }
     }
 
