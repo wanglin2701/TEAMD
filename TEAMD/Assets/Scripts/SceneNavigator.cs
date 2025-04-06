@@ -89,7 +89,10 @@ public class SceneNavigator : MonoBehaviour
 
     public void GoTitleScreen()
     {
+
         soundManaager.PlaySound("BTNClick");
+        soundManaager.ChangeMusic("BG");
+
 
         Time.timeScale = 1f;
         SceneManager.LoadScene("TitleScreen");
